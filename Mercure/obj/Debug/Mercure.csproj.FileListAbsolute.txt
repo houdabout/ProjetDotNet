@@ -1,0 +1,11 @@
+C:\Users\simoe\Documents\visual studio 2015\Projects\Mercure\Mercure\bin\Debug\Mercure.exe.config
+C:\Users\Houda BOUTBIB\Desktop\Mercure_dontNet\mercure\Mercure\bin\Debug\Mercure.exe.config
+C:\Users\Houda BOUTBIB\Desktop\Mercure_dontNet\mercure\Mercure\obj\Debug\Mercure.csprojResolveAssemblyReference.cache
+C:\Users\Houda BOUTBIB\Desktop\Mercure_dontNet\mercure\Mercure\obj\Debug\Mercure.Form1.resources
+C:\Users\Houda BOUTBIB\Desktop\Mercure_dontNet\mercure\Mercure\obj\Debug\Mercure.Properties.Resources.resources
+C:\Users\Houda BOUTBIB\Desktop\Mercure_dontNet\mercure\Mercure\obj\Debug\Mercure.csproj.GenerateResource.Cache
+C:\Users\Houda BOUTBIB\Desktop\Mercure_dontNet\mercure\Mercure\bin\Debug\Mercure.exe
+C:\Users\Houda BOUTBIB\Desktop\Mercure_dontNet\mercure\Mercure\bin\Debug\Mercure.pdb
+C:\Users\Houda BOUTBIB\Desktop\Mercure_dontNet\mercure\Mercure\bin\Debug\System.Data.SQLite.dll
+C:\Users\Houda BOUTBIB\Desktop\Mercure_dontNet\mercure\Mercure\obj\Debug\Mercure.exe
+C:\Users\Houda BOUTBIB\Desktop\Mercure_dontNet\mercure\Mercure\obj\Debug\Mercure.pdb
