@@ -40,12 +40,13 @@ namespace Mercure
                 dt.Load(reader);
                 reader.Close();
                 cnn.Close();
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 throw new Exception(e.Message);
             }
             return dt;
         }
-
 
         public bool Delete(String tableName, String where)
         {
@@ -53,9 +54,10 @@ namespace Mercure
             try
             {
                 this.ExecuteNonQuery(String.Format("delete from {0} where {1};", tableName, where));
-             }
+            }
             catch (Exception fail)
             {
+                Console.WriteLine("Delete error : " + fail.Message);
                 returnCode = false;
             }
             return returnCode;
@@ -79,6 +81,7 @@ namespace Mercure
             }
             catch (Exception fail)
             {
+                Console.WriteLine("Insert error : " + fail.Message);
                 returnCode = false;
             }
             return returnCode;
@@ -91,10 +94,29 @@ namespace Mercure
                 this.ExecuteNonQuery(String.Format("DELETE FROM {0}", table));
                 return true;
             }
-            catch 
+            catch
             {
                 return false;
             }
+        }
+
+        public bool ClearDB()
+        {
+            DataTable tables;
+            try
+            {
+                tables = this.GetDataTable("select NAME from SQLITE_MASTER where type='table' order by NAME;");
+                foreach (DataRow table in tables.Rows)
+                {
+                    this.ClearTable(table["NAME"].ToString());
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("ClearDB error : " + e.Message);
+                return false;
+            }
+            return true;
         }
     }
 }

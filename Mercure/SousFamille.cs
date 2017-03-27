@@ -73,12 +73,23 @@ namespace Mercure
         public static void RemoveSousFamille(String databaseFile, int Ref)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
-            helper.Delete("familles", String.Format("RefFamille = {0}", Ref));
+            helper.Delete("SousFamilles", String.Format("RefSousFamille = {0}", Ref));
         }
 
         public static List<SousFamille> GetAll(String databaseFile)
         {
-            return null;
+            SQLiteHelper helper = new SQLiteHelper(databaseFile);
+            DataTable marquesTable = helper.GetDataTable("SELECT * FROM SousFamilles");
+            List<SousFamille> sousFamilles = new List<SousFamille>();
+            foreach (DataRow r in marquesTable.Rows)
+            {
+                SousFamille sf = new SousFamille(
+                    Int32.Parse(r["RefSousFamille"].ToString()),
+                    Int32.Parse(r["RefFamille"].ToString()),
+                    r["Nom"].ToString());
+                sousFamilles.Add(sf);
+            }
+            return sousFamilles;
         }
 
         public static int GetSize(String databaseFile)

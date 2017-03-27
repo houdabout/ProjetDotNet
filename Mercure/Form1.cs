@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -33,6 +34,8 @@ namespace Mercure
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
+            SQLiteHelper helper = new SQLiteHelper(databaseFile);
+            helper.ClearDB();
             handleFileDialog();
         }
 
@@ -47,11 +50,12 @@ namespace Mercure
             form.InitialDirectory = "C:\\";
             form.Filter = "XML Files (*.xml)|*.xml";
             form.RestoreDirectory = true;
-
             if (form.ShowDialog() == DialogResult.OK)
             {
-                handleXML(form.FileName);  
+                handleXML(form.FileName);
             }
+
+            progressBar1.Value = 0;
         }
 
         private void handleXML(string filename)
@@ -60,12 +64,12 @@ namespace Mercure
             doc.Load(filename);
             XmlNode root = doc.ChildNodes[1];
             int childCount = root.ChildNodes.Count;
-            foreach(XmlNode node in root.ChildNodes)
+            foreach (XmlNode node in root.ChildNodes)
             {
                 //Handle marque
                 String marqueNom = node.ChildNodes[2].InnerText;
                 Marque marque = Marque.FindMarqueByNom(databaseFile, marqueNom);
-                if(marque == null)
+                if (marque == null)
                 {
                     int Count = Marque.GetSize(databaseFile);
                     marque = new Marque(Count, marqueNom);
@@ -75,11 +79,11 @@ namespace Mercure
                 //Handle Famille
                 String familleNom = node.ChildNodes[3].InnerText;
                 Famille famille = Famille.FindFamilleByNom(databaseFile, familleNom);
-                if(famille == null)
+                if (famille == null)
                 {
                     int Count = Famille.GetSize(databaseFile);
                     famille = new Famille(Count, familleNom);
-                    Famille.AddFamille(databaseFile, famille);
+                    Famille.Insertamille(databaseFile, famille);
                 }
 
                 //Handle SousFamille
@@ -99,9 +103,9 @@ namespace Mercure
                 Article article = Article.FindArticle(databaseFile, refArticle);
                 if (article == null)
                 {
-                    article = new Article(refArticle, description, prixHT, 0, sousFamille.RefSousFamille, marque.RefMarque);
+                    article = new Article(refArticle, description, prixHT, sousFamille.RefSousFamille, marque.RefMarque);
                 }
-                
+
                 progressBar1.Value += 100 / childCount;
             }
         }
