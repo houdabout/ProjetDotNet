@@ -82,8 +82,13 @@ namespace Mercure
             List<Famille> familles = new List<Famille>();
             foreach (DataRow r in marquesTable.Rows)
             {
+<<<<<<< Updated upstream
                 Famille famille = new Famille(Int32.Parse(r["RefFamille"].ToString()), r["Nom"].ToString());
                 familles.Add(famille);
+=======
+                Famille familles = new Famille(Int32.Parse(r["RefFamille"].ToString()), r["Nom"].ToString());
+                famille.Add(familles);
+>>>>>>> Stashed changes
             }
             return familles;
 
