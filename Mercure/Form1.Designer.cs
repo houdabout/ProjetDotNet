@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
-            this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.openUpdateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip2 = new System.Windows.Forms.StatusStrip();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,17 +43,9 @@
             this.toolStripMenuItem1});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(284, 24);
+            this.menuStrip2.Size = new System.Drawing.Size(765, 24);
             this.menuStrip2.TabIndex = 0;
             this.menuStrip2.Text = "menuStrip2";
-            // 
-            // statusStrip2
-            // 
-            this.statusStrip2.Location = new System.Drawing.Point(0, 239);
-            this.statusStrip2.Name = "statusStrip2";
-            this.statusStrip2.Size = new System.Drawing.Size(284, 22);
-            this.statusStrip2.TabIndex = 1;
-            this.statusStrip2.Text = "statusStrip2";
             // 
             // toolStripMenuItem1
             // 
@@ -67,9 +59,24 @@
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(147, 22);
             this.toolStripMenuItem3.Text = "Open & Purge";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
+            // 
+            // openUpdateToolStripMenuItem
+            // 
+            this.openUpdateToolStripMenuItem.Name = "openUpdateToolStripMenuItem";
+            this.openUpdateToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.openUpdateToolStripMenuItem.Text = "Open & Update";
+            this.openUpdateToolStripMenuItem.Click += new System.EventHandler(this.openUpdateToolStripMenuItem_Click);
+            // 
+            // statusStrip2
+            // 
+            this.statusStrip2.Location = new System.Drawing.Point(0, 361);
+            this.statusStrip2.Name = "statusStrip2";
+            this.statusStrip2.Size = new System.Drawing.Size(765, 22);
+            this.statusStrip2.TabIndex = 1;
+            this.statusStrip2.Text = "statusStrip2";
             // 
             // progressBar1
             // 
@@ -78,21 +85,15 @@
             this.progressBar1.Size = new System.Drawing.Size(142, 29);
             this.progressBar1.TabIndex = 2;
             // 
-            // openUpdateToolStripMenuItem
-            // 
-            this.openUpdateToolStripMenuItem.Name = "openUpdateToolStripMenuItem";
-            this.openUpdateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.openUpdateToolStripMenuItem.Text = "Open & Update";
-            this.openUpdateToolStripMenuItem.Click += new System.EventHandler(this.openUpdateToolStripMenuItem_Click);
-            // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(765, 383);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.statusStrip2);
             this.Controls.Add(this.menuStrip2);
             this.MainMenuStrip = this.menuStrip2;
             this.Name = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load_1);
             this.menuStrip2.ResumeLayout(false);
             this.menuStrip2.PerformLayout();
             this.ResumeLayout(false);

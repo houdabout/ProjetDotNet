@@ -19,7 +19,7 @@ namespace Mercure
             this.Nom = Nom;
         }
 
-        public static void Insertamille(String databaseFile, Famille famille)
+        public static void InsertFamille(String databaseFile, Famille famille)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
             Dictionary<String, Object> data = new Dictionary<String, Object>();
@@ -82,13 +82,8 @@ namespace Mercure
             List<Famille> familles = new List<Famille>();
             foreach (DataRow r in marquesTable.Rows)
             {
-<<<<<<< Updated upstream
                 Famille famille = new Famille(Int32.Parse(r["RefFamille"].ToString()), r["Nom"].ToString());
                 familles.Add(famille);
-=======
-                Famille familles = new Famille(Int32.Parse(r["RefFamille"].ToString()), r["Nom"].ToString());
-                famille.Add(familles);
->>>>>>> Stashed changes
             }
             return familles;
 

@@ -6,7 +6,6 @@ C:\Users\Houda BOUTBIB\Desktop\Mercure_dontNet\mercure\Mercure\obj\Debug\Mercure
 C:\Users\Houda BOUTBIB\Desktop\Mercure_dontNet\mercure\Mercure\obj\Debug\Mercure.csproj.GenerateResource.Cache
 C:\Users\Houda BOUTBIB\Desktop\Mercure_dontNet\mercure\Mercure\bin\Debug\Mercure.exe
 C:\Users\Houda BOUTBIB\Desktop\Mercure_dontNet\mercure\Mercure\bin\Debug\Mercure.pdb
-C:\Users\Houda BOUTBIB\Desktop\Mercure_dontNet\mercure\Mercure\bin\Debug\System.Data.SQLite.dll
 C:\Users\Houda BOUTBIB\Desktop\Mercure_dontNet\mercure\Mercure\obj\Debug\Mercure.exe
 C:\Users\Houda BOUTBIB\Desktop\Mercure_dontNet\mercure\Mercure\obj\Debug\Mercure.pdb
 C:\Users\simoe\Documents\ProjetDotNet\Mercure\bin\Debug\Mercure.exe.config
@@ -20,3 +19,4 @@ C:\Users\simoe\Documents\ProjetDotNet\Mercure\bin\Debug\System.Data.SQLite.dll
 C:\Users\simoe\Documents\ProjetDotNet\Mercure\bin\Debug\System.Data.SQLite.xml
 C:\Users\simoe\Documents\ProjetDotNet\Mercure\obj\Debug\Mercure.exe
 C:\Users\simoe\Documents\ProjetDotNet\Mercure\obj\Debug\Mercure.pdb
+C:\Users\Houda BOUTBIB\Desktop\Mercure_dontNet\mercure\Mercure\bin\Debug\System.Data.SQLite.xml
