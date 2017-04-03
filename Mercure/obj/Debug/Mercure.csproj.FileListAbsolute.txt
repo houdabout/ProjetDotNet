@@ -20,3 +20,4 @@ C:\Users\simoe\Documents\ProjetDotNet\Mercure\bin\Debug\System.Data.SQLite.xml
 C:\Users\simoe\Documents\ProjetDotNet\Mercure\obj\Debug\Mercure.exe
 C:\Users\simoe\Documents\ProjetDotNet\Mercure\obj\Debug\Mercure.pdb
 C:\Users\Houda BOUTBIB\Desktop\Mercure_dontNet\mercure\Mercure\bin\Debug\System.Data.SQLite.xml
+C:\Users\Houda BOUTBIB\Desktop\Projet\ProjetDotNet\Mercure\bin\Debug\Mercure.exe.config
