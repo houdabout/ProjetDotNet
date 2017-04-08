@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
@@ -17,14 +15,14 @@ namespace Mercure
 
     public partial class FormAjouterFichier : Form
     {
-        private Button Selectioner;
-        private TextBox textBox1;
+        private Button parcourirButton;
+        private TextBox filenameTextBox;
         private GroupBox groupBox2;
-        private RadioButton radioButton2;
-        private RadioButton radioButton1;
-        private ProgressBar progressBar1;
-        private RichTextBox richTextBox1;
-        private Button button1;
+        private RadioButton miseRadioButton;
+        private RadioButton nouvelleRadioButton;
+        private ProgressBar integrationProgressBar;
+        private RichTextBox progressTextBox;
+        private Button commencerButton;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
         private GroupBox Ajoute;
 
@@ -34,14 +32,14 @@ namespace Mercure
         private void InitializeComponent()
         {
             this.Ajoute = new System.Windows.Forms.GroupBox();
-            this.Selectioner = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.parcourirButton = new System.Windows.Forms.Button();
+            this.filenameTextBox = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.miseRadioButton = new System.Windows.Forms.RadioButton();
+            this.nouvelleRadioButton = new System.Windows.Forms.RadioButton();
+            this.integrationProgressBar = new System.Windows.Forms.ProgressBar();
+            this.progressTextBox = new System.Windows.Forms.RichTextBox();
+            this.commencerButton = new System.Windows.Forms.Button();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.Ajoute.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -50,92 +48,94 @@ namespace Mercure
             // 
             // Ajoute
             // 
-            this.Ajoute.Controls.Add(this.Selectioner);
-            this.Ajoute.Controls.Add(this.textBox1);
+            this.Ajoute.Controls.Add(this.parcourirButton);
+            this.Ajoute.Controls.Add(this.filenameTextBox);
             this.Ajoute.Location = new System.Drawing.Point(12, 12);
             this.Ajoute.Name = "Ajoute";
-            this.Ajoute.Size = new System.Drawing.Size(526, 77);
+            this.Ajoute.Size = new System.Drawing.Size(696, 77);
             this.Ajoute.TabIndex = 0;
             this.Ajoute.TabStop = false;
             this.Ajoute.Text = "Selectionner Fichier";
             this.Ajoute.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
-            // Selectioner
+            // parcourirButton
             // 
-            this.Selectioner.Location = new System.Drawing.Point(248, 25);
-            this.Selectioner.Name = "Selectioner";
-            this.Selectioner.Size = new System.Drawing.Size(75, 23);
-            this.Selectioner.TabIndex = 1;
-            this.Selectioner.Text = "Selectionner";
-            this.Selectioner.UseVisualStyleBackColor = true;
-            this.Selectioner.Click += new System.EventHandler(this.Selectioner_Click);
+            this.parcourirButton.Location = new System.Drawing.Point(290, 28);
+            this.parcourirButton.Name = "parcourirButton";
+            this.parcourirButton.Size = new System.Drawing.Size(75, 20);
+            this.parcourirButton.TabIndex = 1;
+            this.parcourirButton.Text = "Parcourir";
+            this.parcourirButton.UseVisualStyleBackColor = true;
+            this.parcourirButton.Click += new System.EventHandler(this.Selectioner_Click);
             // 
-            // textBox1
+            // filenameTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(6, 28);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(215, 20);
-            this.textBox1.TabIndex = 0;
+            this.filenameTextBox.Enabled = false;
+            this.filenameTextBox.Location = new System.Drawing.Point(44, 28);
+            this.filenameTextBox.Name = "filenameTextBox";
+            this.filenameTextBox.ReadOnly = true;
+            this.filenameTextBox.Size = new System.Drawing.Size(215, 20);
+            this.filenameTextBox.TabIndex = 0;
             // 
             // groupBox2
             // 
-            this.groupBox2.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.groupBox2.Controls.Add(this.radioButton2);
-            this.groupBox2.Controls.Add(this.radioButton1);
-            this.groupBox2.Location = new System.Drawing.Point(-3, 118);
+            this.groupBox2.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox2.Controls.Add(this.miseRadioButton);
+            this.groupBox2.Controls.Add(this.nouvelleRadioButton);
+            this.groupBox2.Location = new System.Drawing.Point(12, 118);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(541, 76);
+            this.groupBox2.Size = new System.Drawing.Size(696, 76);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Option";
             // 
-            // radioButton2
+            // miseRadioButton
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(235, 35);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(81, 17);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Mise a jours";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.miseRadioButton.AutoSize = true;
+            this.miseRadioButton.Location = new System.Drawing.Point(197, 35);
+            this.miseRadioButton.Name = "miseRadioButton";
+            this.miseRadioButton.Size = new System.Drawing.Size(76, 17);
+            this.miseRadioButton.TabIndex = 1;
+            this.miseRadioButton.TabStop = true;
+            this.miseRadioButton.Text = "Mise à jour";
+            this.miseRadioButton.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // nouvelleRadioButton
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(44, 35);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(119, 17);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Nouvelle integration";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.nouvelleRadioButton.AutoSize = true;
+            this.nouvelleRadioButton.Location = new System.Drawing.Point(44, 35);
+            this.nouvelleRadioButton.Name = "nouvelleRadioButton";
+            this.nouvelleRadioButton.Size = new System.Drawing.Size(119, 17);
+            this.nouvelleRadioButton.TabIndex = 0;
+            this.nouvelleRadioButton.TabStop = true;
+            this.nouvelleRadioButton.Text = "Nouvelle integration";
+            this.nouvelleRadioButton.UseVisualStyleBackColor = true;
             // 
-            // progressBar1
+            // integrationProgressBar
             // 
-            this.progressBar1.Location = new System.Drawing.Point(342, 210);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(400, 22);
-            this.progressBar1.TabIndex = 2;
-            this.progressBar1.Click += new System.EventHandler(this.progressBar1_Click);
+            this.integrationProgressBar.Location = new System.Drawing.Point(342, 210);
+            this.integrationProgressBar.Name = "integrationProgressBar";
+            this.integrationProgressBar.Size = new System.Drawing.Size(366, 22);
+            this.integrationProgressBar.TabIndex = 2;
+            this.integrationProgressBar.Click += new System.EventHandler(this.progressBar1_Click);
             // 
-            // richTextBox1
+            // progressTextBox
             // 
-            this.richTextBox1.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.richTextBox1.Location = new System.Drawing.Point(-3, 238);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(730, 129);
-            this.richTextBox1.TabIndex = 3;
-            this.richTextBox1.Text = "";
+            this.progressTextBox.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.progressTextBox.Location = new System.Drawing.Point(12, 238);
+            this.progressTextBox.Name = "progressTextBox";
+            this.progressTextBox.Size = new System.Drawing.Size(696, 110);
+            this.progressTextBox.TabIndex = 3;
+            this.progressTextBox.Text = "";
             // 
-            // button1
+            // commencerButton
             // 
-            this.button1.Location = new System.Drawing.Point(-3, 210);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(327, 22);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Commencer Integration";
-            this.button1.UseVisualStyleBackColor = true;
+            this.commencerButton.Location = new System.Drawing.Point(12, 210);
+            this.commencerButton.Name = "commencerButton";
+            this.commencerButton.Size = new System.Drawing.Size(312, 22);
+            this.commencerButton.TabIndex = 4;
+            this.commencerButton.Text = "Commencer Integration";
+            this.commencerButton.UseVisualStyleBackColor = true;
             // 
             // fileSystemWatcher1
             // 
@@ -145,9 +145,9 @@ namespace Mercure
             // FormAjouterFichier
             // 
             this.ClientSize = new System.Drawing.Size(720, 360);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.commencerButton);
+            this.Controls.Add(this.progressTextBox);
+            this.Controls.Add(this.integrationProgressBar);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.Ajoute);
             this.Name = "FormAjouterFichier";

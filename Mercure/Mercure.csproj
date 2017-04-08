@@ -61,41 +61,20 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormAjouterArticle.cs">
+    <Compile Include="FormSaveArticle.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormAjouterFamille.cs">
+    <Compile Include="FormSaveFamille.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormAjouterFichier.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormAjouterMarque.cs">
+    <Compile Include="FormSaveMarque.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormAjouterSousFamille.cs">
+    <Compile Include="FormSaveSousFamille.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormUpdateArticle.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormUpdateFamille.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormUpdateFamille.Designer.cs">
-      <DependentUpon>FormUpdateFamille.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormUpdateMarque.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormUpdateMarque.Designer.cs">
-      <DependentUpon>FormUpdateMarque.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormUpdateSousFamille.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormUpdateSousFamille.Designer.cs">
-      <DependentUpon>FormUpdateSousFamille.cs</DependentUpon>
     </Compile>
     <Compile Include="Marque.cs" />
     <Compile Include="Program.cs" />
@@ -105,20 +84,20 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormAjouterArticle.resx">
-      <DependentUpon>FormAjouterArticle.cs</DependentUpon>
+    <EmbeddedResource Include="FormSaveArticle.resx">
+      <DependentUpon>FormSaveArticle.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormAjouterFamille.resx">
-      <DependentUpon>FormAjouterFamille.cs</DependentUpon>
+    <EmbeddedResource Include="FormSaveFamille.resx">
+      <DependentUpon>FormSaveFamille.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAjouterFichier.resx">
       <DependentUpon>FormAjouterFichier.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormAjouterMarque.resx">
-      <DependentUpon>FormAjouterMarque.cs</DependentUpon>
+    <EmbeddedResource Include="FormSaveMarque.resx">
+      <DependentUpon>FormSaveMarque.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormAjouterSousFamille.resx">
-      <DependentUpon>FormAjouterSousFamille.cs</DependentUpon>
+    <EmbeddedResource Include="FormSaveSousFamille.resx">
+      <DependentUpon>FormSaveSousFamille.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

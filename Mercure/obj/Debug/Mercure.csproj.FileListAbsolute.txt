@@ -21,3 +21,8 @@ C:\Users\simoe\Documents\ProjetDotNet\Mercure\obj\Debug\Mercure.exe
 C:\Users\simoe\Documents\ProjetDotNet\Mercure\obj\Debug\Mercure.pdb
 C:\Users\Houda BOUTBIB\Desktop\Mercure_dontNet\mercure\Mercure\bin\Debug\System.Data.SQLite.xml
 C:\Users\Houda BOUTBIB\Desktop\Projet\ProjetDotNet\Mercure\bin\Debug\Mercure.exe.config
+C:\Users\simoe\Documents\ProjetDotNet\Mercure\obj\Debug\Mercure.FormSaveArticle.resources
+C:\Users\simoe\Documents\ProjetDotNet\Mercure\obj\Debug\Mercure.FormSaveFamille.resources
+C:\Users\simoe\Documents\ProjetDotNet\Mercure\obj\Debug\Mercure.FormAjouterFichier.resources
+C:\Users\simoe\Documents\ProjetDotNet\Mercure\obj\Debug\Mercure.FormSaveMarque.resources
+C:\Users\simoe\Documents\ProjetDotNet\Mercure\obj\Debug\Mercure.FormSaveSousFamille.resources
