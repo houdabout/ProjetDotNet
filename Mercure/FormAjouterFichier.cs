@@ -17,6 +17,7 @@ namespace Mercure
 
     public partial class FormAjouterFichier : Form
     {
+       
         private Button parcourirButton;
         private TextBox filenameTextBox;
         private GroupBox groupBox2;
@@ -28,11 +29,29 @@ namespace Mercure
         private System.IO.FileSystemWatcher fileSystemWatcher1;
         private GroupBox Ajoute;
 
+        /**
+        * Constante pour l'operation de mise à jour
+        */
         private const String OPERATION_UPDATE = "update";
+        
+        /**
+        * Constante pour l'operation de la nouvelle integration
+        */
         private const String OPERATION_CLEAR_INSERT = "clear&insert";
 
+        /**
+        * Nom de la base de données
+        */
         private String databaseFileName = "Mercure.SQLite";
+
+        /**
+        * Nom du fichier XML
+        */
         private String XmlFileName = null;
+
+        /**
+        * Operation de l'integration, par defaut c'est la nouvelle integration
+        */
         private String operation = OPERATION_CLEAR_INSERT;
 
         public FormAjouterFichier()
@@ -171,7 +190,10 @@ namespace Mercure
             this.ResumeLayout(false);
 
         }
-        
+
+        /**
+        * Evenement du changement de texte dans progressTextBox
+        */
         private void progressTextBox_TextChanged(object sender, EventArgs e)
         {
             // set the current caret position to the end
@@ -180,30 +202,46 @@ namespace Mercure
             progressTextBox.ScrollToCaret();
         }
 
+        /**
+        * Evenement de click de parcourirButton
+        */
         private void parcourirButton_Click(object sender, EventArgs e)
         {
             FileDialog form = new OpenFileDialog();
             form.InitialDirectory = "C:\\";
             form.Filter = "XML Files (*.xml)|*.xml";
             form.RestoreDirectory = true;
+            //Ouverture d'un dialogue de fichier
             if (form.ShowDialog() == DialogResult.OK)
             {
+                //Sauvegarde du nom de fichier
                 setCurrentFileName(form.FileName);
             }
         }
 
+        /**
+        * Evenement de click de commencerButton
+        */
         private void commencerButton_Click(object sender, EventArgs e)
         {
             if(XmlFileName != null)
             {
+                //Efface les messages dans progressTextBox
                 RegisterMessage(null, true);
+
+                //Enregistre l'option choisi par l'utilisateur
                 bool miseChecked = miseRadioButton.Checked;
                 if (miseChecked)
                 {
                     operation = OPERATION_UPDATE;
+                } else
+                {
+                    operation = OPERATION_CLEAR_INSERT;
                 }
-                Thread tid1 = new Thread(new ThreadStart(HandleXML));
-                tid1.Start();
+
+                //Un thread séparé pour gérer le fichier xml
+                Thread workerThread = new Thread(new ThreadStart(HandleXML));
+                workerThread.Start();
             }
             else
             {
@@ -211,8 +249,12 @@ namespace Mercure
             }
         }
 
+        /**
+        * Fonction privée pour gérer le fichier xml
+        */
         private void HandleXML()
         {
+            //Efface la base de données si l'utilisateur a choisi nouvelle integration
             SQLiteHelper helper = new SQLiteHelper(databaseFileName);
             if (operation == OPERATION_CLEAR_INSERT)
             {
@@ -220,117 +262,171 @@ namespace Mercure
                 RegisterMessage("Database is cleared.");
             }
 
+            //Charge le fichier xml et affiche un message à l'utilisateur
             XmlDocument doc = new XmlDocument();
             doc.Load(XmlFileName);
             RegisterMessage("Document is loaded.");
+
+            //Prendre le noeud des articles
             XmlNode root = doc.ChildNodes[1];
+
+            //Nombre des articles dans le fichier
             int childCount = root.ChildNodes.Count;
+
+            //Combien devrait augmenter la barre de progression
             int incrementor = (int)Math.Ceiling((double)(100 / childCount));
+
             foreach (XmlNode node in root.ChildNodes)
             {
+                //Insère la marque dans la base de données
                 Marque marque = HandleMarque(node);
 
+                //Insère la famille dans la base de données
                 Famille famille = HandleFamille(node);
 
+                //Insère le sous-famille dans la base de données 
                 SousFamille sousFamille = HandleSousFamille(node, famille);
 
+                //Insère l'article dans la base de données
                 Article article = HandleArticle(node, marque, sousFamille);
 
+                //Incremente la barre de progression
                 IncrementProgress(incrementor);
             }
+            //Affiche un message de succés
             RegisterMessage("The integration was successful.");
+            //Efface l'ancien nom de fichier
             setCurrentFileName(null);
+            //Réinitialise la barre de progression
             ResetProgress();
         }
 
-        private Article HandleArticle(XmlNode node, Marque marque, SousFamille sousFamille)
-        {
-            //Handle article
-            String refArticle = node.ChildNodes[1].InnerText;
-            String description = node.ChildNodes[0].InnerText;
-            float prixHT = float.Parse(node.ChildNodes[5].InnerText);
-            Article article = Article.FindArticle(databaseFileName, refArticle);
-            if (article == null)
-            {
-                article = new Article(refArticle, description, prixHT, 0, sousFamille.RefSousFamille, marque.RefMarque);
-                Article.InsertArticle(databaseFileName, article);
 
-                RegisterMessage("Article : " + refArticle + " is added.");
+        /**
+        * Fonction privée pour gérer la marque dans le noeud
+        */
+        private Marque HandleMarque(XmlNode node)
+        {
+            //Nom de la marque
+            String marqueNom = node.ChildNodes[2].InnerText;
+            //Recherche si la marque est déjà dans la base de données
+            Marque marque = Marque.FindMarqueByNom(databaseFileName, marqueNom);
+            if (marque == null)
+            {
+                //Insertion de la marque
+                int Count = Marque.GetSize(databaseFileName);
+                marque = new Marque(Count, marqueNom);
+                Marque.InsertMarque(databaseFileName, marque);
+
+                //Affiche d'un message de notification
+                RegisterMessage("Marque : " + marqueNom + " is added.");
             }
-            return article;
+
+            return marque;
         }
 
+        /**
+        * Fonction privée pour gérer le sous-famille dans le noeud
+        */
         private SousFamille HandleSousFamille(XmlNode node, Famille famille)
         {
-            //Handle SousFamille
+            //Npm de sous-famille
             String sousFamilleNom = node.ChildNodes[4].InnerText;
+            //Recherche si le sous-famille est déjà dans la base de données
             SousFamille sousFamille = SousFamille.FindSousFamilleByNom(databaseFileName, sousFamilleNom);
             if (sousFamille == null)
             {
+                //Insertion de sous-famille
                 int Count = SousFamille.GetSize(databaseFileName);
                 sousFamille = new SousFamille(Count, famille.RefFamille, sousFamilleNom);
                 SousFamille.InsertSousFamille(databaseFileName, sousFamille);
 
+                //Affiche d'un message de notification
                 RegisterMessage("Sous-Famille : " + sousFamilleNom + " is added.");
             }
 
             return sousFamille;
         }
 
+        /**
+        * Fonction privée pour gérer la famille dans le noeud
+        */
         private Famille HandleFamille(XmlNode node)
         {
-            //Handle Famille
+            //Nom de la Famille
             String familleNom = node.ChildNodes[3].InnerText;
+            //Recherche si la famille est déjà dans la base de données
             Famille famille = Famille.FindFamilleByNom(databaseFileName, familleNom);
             if (famille == null)
             {
+                //Insertion de la famille
                 int Count = Famille.GetSize(databaseFileName);
                 famille = new Famille(Count, familleNom);
                 Famille.InsertFamille(databaseFileName, famille);
 
+                //Affiche d'un message de notification
                 RegisterMessage("Famille : " + familleNom + " is added.");
             }
 
             return famille;
         }
 
-        private Marque HandleMarque(XmlNode node)
+        /**
+        * Fonction privée pour gérer l'article dans le noeud
+        */
+        private Article HandleArticle(XmlNode node, Marque marque, SousFamille sousFamille)
         {
-            //Handle marque
-            String marqueNom = node.ChildNodes[2].InnerText;
-            Marque marque = Marque.FindMarqueByNom(databaseFileName, marqueNom);
-            if (marque == null)
+            //Reference de l'article
+            String refArticle = node.ChildNodes[1].InnerText;
+            //Description de l'article
+            String description = node.ChildNodes[0].InnerText;
+            //Prix de l'article
+            float prixHT = float.Parse(node.ChildNodes[5].InnerText);
+
+            //Recherche si l'article est déjà dans la base de données
+            Article article = Article.FindArticle(databaseFileName, refArticle);
+            if (article == null)
             {
-                int Count = Marque.GetSize(databaseFileName);
-                marque = new Marque(Count, marqueNom);
-                Marque.InsertMarque(databaseFileName, marque);
+                //Insertion de l'article
+                article = new Article(refArticle, description, prixHT, 0, sousFamille.RefSousFamille, marque.RefMarque);
+                Article.InsertArticle(databaseFileName, article);
 
-                RegisterMessage("Marque : "+ marqueNom + " is added.");
+                //Affiche d'un message de notification
+                RegisterMessage("Article : " + refArticle + " is added.");
             }
-
-            return marque;
+            return article;
         }
 
+        /**
+        * Fonction privée pour afficher un message à l'utilisateur
+        */
         private void RegisterMessage(String message, bool preempty = false)
         {
             this.Invoke((MethodInvoker)delegate 
             {
                 if (preempty)
                 {
+                    //Vide le boite de texte
                     progressTextBox.Text = "";
                 }
+                //Ajoute un texte dans progressTextBox
                 progressTextBox.AppendText(message + "\n");
             });
         }
 
+        /**
+        * Fonction privée pour incrementer la barre de progression
+        */
         private void IncrementProgress(int progress)
         {
             this.Invoke((MethodInvoker)delegate
             {
+                //Incremente la barre s'il ne dépasse pas 100
                 if (integrationProgressBar.Value < 100 && integrationProgressBar.Value + progress <= 100)
                 {
                     integrationProgressBar.Value += progress;
                 }
+                //S'il dépasse 100 on met la valeur 100 dans la barre de progression
                 else
                 {
                     integrationProgressBar.Value = 100;
@@ -338,6 +434,9 @@ namespace Mercure
             });
         }
 
+        /**
+        * Fonction privée pour réinitialiser la barre de progression
+        */
         private void ResetProgress()
         {
             this.Invoke((MethodInvoker)delegate
@@ -346,6 +445,9 @@ namespace Mercure
             });
         }
 
+        /**
+        * Fonction privée pour définir le nom de fichier actuel
+        */
         private void setCurrentFileName(String name)
         {
             XmlFileName = name;
