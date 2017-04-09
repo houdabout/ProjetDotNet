@@ -13,14 +13,16 @@ namespace Mercure
         public string RefArticle { get; set; }
         public string Description { get; set; }
         public float PrixHT { get; set; }
+        public int Quantite { get; set; }
         public int RefSousFamille { get; set; }
         public int RefMarque { get; set; }
 
-        public Article(string RefA, string Desc, float Prix, int RefSF, int RefM)
+        public Article(string RefA, string Desc, float Prix, int Quantite, int RefSF, int RefM)
         {
             this.RefArticle = RefA;
             this.Description = Desc;
             this.PrixHT = Prix;
+            this.Quantite = Quantite;
             this.RefSousFamille = RefSF;
             this.RefMarque = RefM;
         }
@@ -34,6 +36,7 @@ namespace Mercure
             data.Add("RefSousFamille", article.RefSousFamille);
             data.Add("RefMarque", article.RefMarque);
             data.Add("PrixHT", article.PrixHT);
+            data.Add("Quantite", article.Quantite);
             helper.Insert("Articles", data);
         }
 
@@ -52,9 +55,10 @@ namespace Mercure
                 String RefArticle = row["RefArticle"].ToString();
                 String Description = row["Description"].ToString();
                 float PrixHT = float.Parse(row["PrixHT"].ToString());
+                int Quantite = int.Parse(row["Quantite"].ToString());
                 int RefSousFamille = Int32.Parse(row["RefSousFamille"].ToString());
                 int RefMarque = Int32.Parse(row["RefMarque"].ToString());
-                return new Article(RefArticle, Description, PrixHT, RefSousFamille, RefMarque);
+                return new Article(RefArticle, Description, PrixHT, Quantite, RefSousFamille, RefMarque);
             }
             catch (Exception e)
             {
@@ -80,8 +84,9 @@ namespace Mercure
                 {
                     Article article = new Article(
                         r["RefArticle"].ToString(),
-                        r["Description"].ToString(),
+                        r["Description"].ToString(), 
                         float.Parse(r["PrixHT"].ToString()),
+                        int.Parse(r["Quantite"].ToString()),
                         Int32.Parse(r["RefSousFamille"].ToString()),
                         Int32.Parse(r["RefMarque"].ToString()));
                     articles.Add(article);
