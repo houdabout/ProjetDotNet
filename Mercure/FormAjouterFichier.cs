@@ -13,8 +13,6 @@ using System.Threading;
 
 namespace Mercure
 {
-
-
     public partial class FormAjouterFichier : Form
     {
        

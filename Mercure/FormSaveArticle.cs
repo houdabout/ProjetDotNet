@@ -24,17 +24,40 @@ namespace Mercure
         private TextBox quantiteTextBox;
         private Label label3;
 
+        /**
+        * modifier une article ou non
+        */
         private bool toUpdate = false;
+
+        /**
+        * nom de la base de données
+        */
         private String databaseFileName = Configuration.DEFAULT_DATABASE;
+
+        /**
+        * Liste des sous familles
+        */
         private List<SousFamille> sousFamilleList = null;
+
+        /**
+        * Liste des marques
+        */
         private List<Marque> marqueList = null;
 
+        /**
+        * Constructeur par défaut
+        */
         public FormSaveArticle()
         {
             InitializeComponent();
             InitializeLists();
         }
 
+        /**
+        * Constructeur
+        * Param:
+        *   Article à modifier
+        */
         public FormSaveArticle(Article article)
         {
             this.toUpdate = true;
@@ -43,6 +66,11 @@ namespace Mercure
             InitializeLists();
         }
 
+        /**
+        * Constructeur
+        * Param:
+        *   nom de la base de données
+        */
         public FormSaveArticle(String databaseFileName)
         {
             this.databaseFileName = databaseFileName;
@@ -50,6 +78,12 @@ namespace Mercure
             InitializeLists();
         }
 
+        /**
+        * Constructeur
+        * Param:
+        *   nom de la base de données
+        *   Article à modifier
+        */
         public FormSaveArticle(String databaseFileName, Article article)
         {
             this.databaseFileName = databaseFileName;
@@ -220,64 +254,90 @@ namespace Mercure
 
             }
 
+        /**
+        * Fonction privée pour initialiser les champs d'article à modifier
+        */
         private void InitializeTextBoxes(Article article)
         {
             referenceArticleTextBox.Text = article.RefArticle;
             descriptionTextBox.Text = article.Description;
-            prixTextBox.Text = Convert.ToString(article.PrixHT);
-            quantiteTextBox.Text = Convert.ToString(article.Quantite);
+            prixTextBox.Text = Convert.ToString(article.PrixHT); // conversion de float à string
+            quantiteTextBox.Text = Convert.ToString(article.Quantite); // conversion de int à string
         }
 
+        /**
+        * Fonction privée pour initialiser les listes de sous-familles et marques
+        */
         private void InitializeLists()
         {
+            //Chargement la liste des sous-familles dans le combo-box
             sousFamilleList = SousFamille.GetAll(databaseFileName);
             foreach (SousFamille sf in sousFamilleList)
             {
                 sousFamilleComboBox.Items.Add(sf.Nom);
-                sousFamilleComboBox.SelectedIndex = 0;
+                sousFamilleComboBox.SelectedIndex = 0; // Selection de premier sous-famille par défaut
             }
+            //Chargement la liste des marques dans le combo-box
             marqueList = Marque.GetAll(databaseFileName);
             foreach (Marque m in marqueList)
             {
                 marqueComboBox.Items.Add(m.Nom);
-                marqueComboBox.SelectedIndex = 0;
+                marqueComboBox.SelectedIndex = 0; // Selection de la premiere articles par défaut
             }
         }
 
+        /**
+        * Evenement de click sur sauvegarderButton
+        */
         private void sauvegarderButton_Click(object sender, EventArgs e)
         {
-            SaveArticle();
+            SaveArticle(); // sauvegrder l'article
+
         }
 
+        /**
+        * Fonction privée pour sauvegarder une article à partir les champs de l'interface
+        */
         private void SaveArticle()
         {
+            //reference de l'article dans le champ de texte
             String RefArticle = referenceArticleTextBox.Text;
+            //description de l'article dans le champ de texte
             String Description = descriptionTextBox.Text;
+            //l'indice de sous-famille selectionné
             int sfIndex = sousFamilleComboBox.SelectedIndex;
+            //l'indice de la marque selectionnée
             int mIndex = marqueComboBox.SelectedIndex;
             try
             {
-                float prix = float.Parse(prixTextBox.Text, CultureInfo.InvariantCulture);
-                int quantite = int.Parse(quantiteTextBox.Text, CultureInfo.InvariantCulture);
-                if (sfIndex > -1 && mIndex > -1)
+                float prix = float.Parse(prixTextBox.Text, CultureInfo.InvariantCulture); // conversion de string à float
+                int quantite = int.Parse(quantiteTextBox.Text, CultureInfo.InvariantCulture); // conversion de string à int
+                if (sfIndex > -1 && mIndex > -1 && !RefArticle.Equals(""))
                 {
+                    //Prendre sous-famille choisi
                     SousFamille sousFamille = sousFamilleList[sfIndex];
+                    //Prendre la marque choisie
                     Marque marque = marqueList[mIndex];
+                    //Reconstruction de l'article
                     Article article = new Article(RefArticle, Description, prix, quantite, sousFamille.RefSousFamille, marque.RefMarque);
                     if(toUpdate)
                     {
+                        //Mise à jour de l'article
                         Article.UpdateArticle(databaseFileName, article);
                         MessageBox.Show("The article was updated.", "Article info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
+                        //Insertion de l'article
                         Article.InsertArticle(databaseFileName, article);
                         MessageBox.Show("The article was added.", "Article info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
+                    //Fermer la fenetre
                     Dispose();
                 }
                 else
                 {
+                    //TODO: translate to french
                     MessageBox.Show("Please fill all the required fields...", "Article error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
