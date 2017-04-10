@@ -25,5 +25,11 @@ namespace Mercure
             ajout.ShowDialog();
             //TODO: update table
         }
+
+        private void ajouterArticleButton_Click(object sender, EventArgs e)
+        {
+            FormSaveArticle saveArticle = new FormSaveArticle();
+            saveArticle.ShowDialog();
+        }
     }
 }

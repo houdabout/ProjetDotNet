@@ -87,6 +87,27 @@ namespace Mercure
             return returnCode;
         }
 
+        public bool Update(String tableName, Dictionary<String, Object> data, String where)
+        {
+            String set = "";
+            Boolean returnCode = true;
+            foreach (KeyValuePair<String, Object> val in data)
+            {
+                set += String.Format(" {0}={1},", val.Key.ToString(), val.Value);
+            }
+            set = set.Substring(0, set.Length - 1);
+            try
+            {
+                this.ExecuteNonQuery(String.Format("update {0} set {1} where {2};", tableName, set, where));
+            }
+            catch (Exception fail)
+            {
+                Console.WriteLine("Update error : " + fail.Message);
+                returnCode = false;
+            }
+            return returnCode;
+        }
+
         public bool ClearTable(String table)
         {
             try

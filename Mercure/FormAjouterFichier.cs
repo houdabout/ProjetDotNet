@@ -42,7 +42,7 @@ namespace Mercure
         /**
         * Nom de la base de données
         */
-        private String databaseFileName = "Mercure.SQLite";
+        private String databaseFileName = Configuration.DEFAULT_DATABASE;
 
         /**
         * Nom du fichier XML
@@ -54,8 +54,20 @@ namespace Mercure
         */
         private String operation = OPERATION_CLEAR_INSERT;
 
+        /**
+        * Constructeur par défaut
+        */
         public FormAjouterFichier()
         {
+            InitializeComponent();
+        }
+
+        /**
+        * Constructeur avec le nom de base de données
+        */
+        public FormAjouterFichier(String databaseFileName)
+        {
+            this.databaseFileName = databaseFileName;
             InitializeComponent();
         }
 

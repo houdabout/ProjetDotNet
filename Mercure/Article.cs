@@ -73,6 +73,18 @@ namespace Mercure
             helper.Delete("Articles", String.Format("RefArticle = '{0}'", Ref));
         }
 
+        public static void UpdateArticle(String databaseFile, Article article)
+        {
+            SQLiteHelper helper = new SQLiteHelper(databaseFile);
+            Dictionary<String, Object> data = new Dictionary<String, Object>();
+            data.Add("Description", article.Description);
+            data.Add("RefSousFamille", article.RefSousFamille);
+            data.Add("RefMarque", article.RefMarque);
+            data.Add("PrixHT", article.PrixHT);
+            data.Add("Quantite", article.Quantite);
+            helper.Update("Articles", data, String.Format("RefArticle = '{0}'", article.RefArticle));
+        }
+
         public static List<Article> GetAll(String databaseFile)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);

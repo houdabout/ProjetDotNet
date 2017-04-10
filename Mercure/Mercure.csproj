@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Article.cs" />
+    <Compile Include="Configuration.cs" />
     <Compile Include="Famille.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
