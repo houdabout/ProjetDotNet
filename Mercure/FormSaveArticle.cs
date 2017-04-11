@@ -322,7 +322,7 @@ namespace Mercure
                     Article article = new Article(RefArticle, Description, prix, quantite, sousFamille.RefSousFamille, marque.RefMarque);
                     if(toUpdate)
                     {
-                        //Mise à jour de l'article
+                        //Modification de l'article
                         Article.UpdateArticle(databaseFileName, article);
                         MessageBox.Show("The article was updated.", "Article info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }

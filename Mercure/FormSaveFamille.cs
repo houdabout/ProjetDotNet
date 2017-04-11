@@ -36,23 +36,42 @@ namespace Mercure
         */
         private String databaseFileName = Configuration.DEFAULT_DATABASE;
 
+        /**
+        * Constructeur par défaut
+        */
         public FormSaveFamille()
         {
             InitializeComponent();
         }
 
+        /**
+        * Constructeur
+        * Param:
+        *   Nom de la base de données
+        */
         public FormSaveFamille(String databaseFileName)
         {
             this.databaseFileName = databaseFileName;
             InitializeComponent();
         }
 
+        /**
+        * Constructeur
+        * Param:
+        *   Famille à modifier
+        */
         public FormSaveFamille(Famille famille)
         {
             InitializeComponent();
             InitializeTextBoxes(famille);
         }
 
+        /**
+        * Constructeur
+        * Param:
+        *   Nom de la base de données
+        *   Famille à modifier
+        */
         public FormSaveFamille(String databaseFileName, Famille famille)
         {
             this.databaseFileName = databaseFileName;
@@ -139,47 +158,64 @@ namespace Mercure
 
         }
 
+        /**
+        * Fonction privée pour initialiser les champs de la famille à modifier
+        */
         private void InitializeTextBoxes(Famille famille)
         {
-            referenceFamilleTextBox.Text = Convert.ToString(famille.RefFamille);
+            referenceFamilleTextBox.Text = Convert.ToString(famille.RefFamille); //converte int à string
             nomFamilleTextBox.Text = famille.Nom;
         }
 
+        /**
+        * Evenement de click sur sauvegarderButton
+        */
         private void sauvegarderButton_Click(object sender, EventArgs e)
         {
             SaveFamille();
         }
 
+        /**
+        * Fonction privée pour sauvegarder une famille à partir les champs de l'interface
+        */
         private void SaveFamille()
         {
+            //Reference de la famille
             String RefText = referenceFamilleTextBox.Text;
+            //Nom de la famille
             String Nom = nomFamilleTextBox.Text;
+            //L'utilisateur doit fournir le reference et le nom
             if(!RefText.Equals("") && !Nom.Equals(""))
             {
                 try
                 {
-                    int RefFamille = int.Parse(RefText);
-                    Famille famille = new Famille(RefFamille, Nom);
+                    int RefFamille = int.Parse(RefText); // converte string à int
+                    Famille famille = new Famille(RefFamille, Nom); // Reconstruction de la famille
                     if (toUpdate)
                     {
+                        //Modification de la famille
                         Famille.UpdateFamille(databaseFileName, famille);
                         MessageBox.Show("The family was updated.", "Article info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         
                     }
                     else
                     {
+                        //Insertion de la famille
                         Famille.InsertFamille(databaseFileName, famille);
                         MessageBox.Show("The family was added.", "Article info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
+                    //Ferme la fenetre
                     Dispose();
                 }
                 catch (FormatException e)
                 {
+                    //Message de l'exception pour notifier l'utilisateur
                     MessageBox.Show(e.Message, "Famille error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
+                //Message de remplission pour l'utilisateur
                 MessageBox.Show("Please fill all the required fields...", "Article error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             
