@@ -48,7 +48,7 @@
             this.modifierMarqueButton = new System.Windows.Forms.ToolStripMenuItem();
             this.supprimerMarqueButton = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
-            this.articleList = new System.Windows.Forms.ListView();
+            this.articleTable = new System.Windows.Forms.ListView();
             this.RefArticleColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.DescriptionColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SousFamilleColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -160,6 +160,7 @@
             this.ajouterSousFamilleButton.Name = "ajouterSousFamilleButton";
             this.ajouterSousFamilleButton.Size = new System.Drawing.Size(129, 22);
             this.ajouterSousFamilleButton.Text = "Ajouter";
+            this.ajouterSousFamilleButton.Click += new System.EventHandler(this.ajouterSousFamilleButton_Click);
             // 
             // modiferSousFamilleButton
             // 
@@ -186,20 +187,20 @@
             // ajouterMarqueButton
             // 
             this.ajouterMarqueButton.Name = "ajouterMarqueButton";
-            this.ajouterMarqueButton.Size = new System.Drawing.Size(152, 22);
+            this.ajouterMarqueButton.Size = new System.Drawing.Size(129, 22);
             this.ajouterMarqueButton.Text = "Ajouter";
             this.ajouterMarqueButton.Click += new System.EventHandler(this.ajouterMarqueButton_Click);
             // 
             // modifierMarqueButton
             // 
             this.modifierMarqueButton.Name = "modifierMarqueButton";
-            this.modifierMarqueButton.Size = new System.Drawing.Size(152, 22);
+            this.modifierMarqueButton.Size = new System.Drawing.Size(129, 22);
             this.modifierMarqueButton.Text = "Modifier";
             // 
             // supprimerMarqueButton
             // 
             this.supprimerMarqueButton.Name = "supprimerMarqueButton";
-            this.supprimerMarqueButton.Size = new System.Drawing.Size(152, 22);
+            this.supprimerMarqueButton.Size = new System.Drawing.Size(129, 22);
             this.supprimerMarqueButton.Text = "Supprimer";
             // 
             // statusStrip2
@@ -210,25 +211,25 @@
             this.statusStrip2.TabIndex = 1;
             this.statusStrip2.Text = "statusStrip2";
             // 
-            // articleList
+            // articleTable
             // 
-            this.articleList.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.articleList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.articleTable.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.articleTable.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.RefArticleColumn,
             this.DescriptionColumn,
             this.SousFamilleColumn,
             this.MarqueColumn,
             this.QuantiteColumn,
             this.PrixColumn});
-            this.articleList.GridLines = true;
-            this.articleList.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.articleList.Location = new System.Drawing.Point(12, 62);
-            this.articleList.MultiSelect = false;
-            this.articleList.Name = "articleList";
-            this.articleList.Size = new System.Drawing.Size(666, 210);
-            this.articleList.TabIndex = 3;
-            this.articleList.UseCompatibleStateImageBehavior = false;
-            this.articleList.View = System.Windows.Forms.View.Details;
+            this.articleTable.GridLines = true;
+            this.articleTable.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.articleTable.Location = new System.Drawing.Point(12, 62);
+            this.articleTable.MultiSelect = false;
+            this.articleTable.Name = "articleTable";
+            this.articleTable.Size = new System.Drawing.Size(666, 210);
+            this.articleTable.TabIndex = 3;
+            this.articleTable.UseCompatibleStateImageBehavior = false;
+            this.articleTable.View = System.Windows.Forms.View.Details;
             // 
             // RefArticleColumn
             // 
@@ -263,11 +264,12 @@
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(690, 297);
-            this.Controls.Add(this.articleList);
+            this.Controls.Add(this.articleTable);
             this.Controls.Add(this.statusStrip2);
             this.Controls.Add(this.menuStrip2);
             this.MainMenuStrip = this.menuStrip2;
             this.Name = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip2.ResumeLayout(false);
             this.menuStrip2.PerformLayout();
             this.ResumeLayout(false);
@@ -286,7 +288,7 @@
         private System.Windows.Forms.ToolStripMenuItem ajouteFichierButton;
         private System.Windows.Forms.StatusStrip statusStrip2;
         private System.Windows.Forms.ToolStripMenuItem articlesToolStripMenuItem;
-        private System.Windows.Forms.ListView articleList;
+        private System.Windows.Forms.ListView articleTable;
         private System.Windows.Forms.ColumnHeader RefArticleColumn;
         private System.Windows.Forms.ColumnHeader DescriptionColumn;
         private System.Windows.Forms.ColumnHeader SousFamilleColumn;

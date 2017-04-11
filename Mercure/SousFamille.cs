@@ -9,16 +9,16 @@ namespace Mercure
 {
     public class SousFamille
     {
+        public int RefSousFamille { get; set; }
+        public int RefFamille { get; set; }
+        public string Nom { get; set; }
+
         public SousFamille(int refSF, int refF, String n)
         {
             RefSousFamille = refSF;
             RefFamille = refF;
             Nom = n;
         }
-
-        public int RefSousFamille { get; set; }
-        public int RefFamille { get; set; }
-        public string Nom { get; set; }
 
         public static void InsertSousFamille(String databaseFile, SousFamille sousF)
         {
@@ -27,13 +27,13 @@ namespace Mercure
             data.Add("RefSousFamille", sousF.RefSousFamille);
             data.Add("RefFamille", sousF.RefFamille);
             data.Add("Nom", sousF.Nom);
-            helper.Insert("SousFamilles", data);
+            helper.Insert(Configuration.SOUS_FAMILLE_TABLE_NAME, data);
         }
 
         public static SousFamille FindSousFamille(String databaseFile, int Ref)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
-            String query = String.Format("SELECT * FROM SousFamilles WHERE RefSousFamille = {0}", Ref);
+            String query = String.Format("SELECT * FROM {0} WHERE RefSousFamille = {1}", Configuration.SOUS_FAMILLE_TABLE_NAME, Ref);
             try
             {
                 DataTable table = helper.GetDataTable(query);
@@ -57,7 +57,7 @@ namespace Mercure
         public static SousFamille FindSousFamilleByNom(String databaseFile, string N)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
-            String query = String.Format("SELECT * FROM SousFamilles WHERE Nom = '{0}'", N);
+            String query = String.Format("SELECT * FROM {0} WHERE Nom = '{1}'", Configuration.SOUS_FAMILLE_TABLE_NAME, N);
             DataTable table = helper.GetDataTable(query);
             if (table.Rows.Count == 0)
             {
@@ -70,16 +70,25 @@ namespace Mercure
             return new SousFamille(RefSousF, RefF, Nom);
         }
 
+        public static void UpdateSousFamille(String databaseFile, SousFamille sousFamille)
+        {
+            SQLiteHelper helper = new SQLiteHelper(databaseFile);
+            Dictionary<String, Object> data = new Dictionary<String, Object>();
+            data.Add("Nom", sousFamille.Nom);
+            data.Add("RefFamille", sousFamille.RefFamille);
+            helper.Update(Configuration.SOUS_FAMILLE_TABLE_NAME, data, String.Format("RefSousFamille = {0}", sousFamille.RefSousFamille));
+        }
+
         public static void RemoveSousFamille(String databaseFile, int Ref)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
-            helper.Delete("SousFamilles", String.Format("RefSousFamille = {0}", Ref));
+            helper.Delete(Configuration.SOUS_FAMILLE_TABLE_NAME, String.Format("RefSousFamille = {0}", Ref));
         }
 
         public static List<SousFamille> GetAll(String databaseFile)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
-            DataTable marquesTable = helper.GetDataTable("SELECT * FROM SousFamilles");
+            DataTable marquesTable = helper.GetDataTable(String.Format("SELECT * FROM {0}", Configuration.SOUS_FAMILLE_TABLE_NAME));
             List<SousFamille> sousFamilles = new List<SousFamille>();
             foreach (DataRow r in marquesTable.Rows)
             {
@@ -95,7 +104,7 @@ namespace Mercure
         public static int GetSize(String databaseFile)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
-            String query = String.Format("SELECT * FROM SousFamilles");
+            String query = String.Format("SELECT * FROM {0}", Configuration.SOUS_FAMILLE_TABLE_NAME);
             DataTable table = helper.GetDataTable(query);
             return table.Rows.Count;
         }

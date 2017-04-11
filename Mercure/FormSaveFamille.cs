@@ -62,6 +62,7 @@ namespace Mercure
         */
         public FormSaveFamille(Famille famille)
         {
+            this.toUpdate = true;
             InitializeComponent();
             InitializeTextBoxes(famille);
         }
@@ -74,6 +75,7 @@ namespace Mercure
         */
         public FormSaveFamille(String databaseFileName, Famille famille)
         {
+            this.toUpdate = true;
             this.databaseFileName = databaseFileName;
             InitializeComponent();
             InitializeTextBoxes(famille);

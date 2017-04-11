@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
-using System.Data.SQLite;
 
 namespace Mercure
 {
@@ -25,13 +21,13 @@ namespace Mercure
             Dictionary<String, Object> data = new Dictionary<String, Object>();
             data.Add("RefMarque", marque.RefMarque);
             data.Add("Nom", marque.Nom);
-            helper.Insert("Marques", data);
+            helper.Insert(Configuration.MARQUE_TABLE_NAME, data);
         }
 
         public static Marque FindMarque(String databaseFile, int Ref)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
-            String query = String.Format("SELECT * FROM Marques WHERE RefMarque = {0}", Ref);
+            String query = String.Format("SELECT * FROM {0} WHERE RefMarque = {1}", Configuration.MARQUE_TABLE_NAME, Ref);
             try
             {
                 DataTable marquesTable = helper.GetDataTable(query);
@@ -67,7 +63,7 @@ namespace Mercure
         public static Marque FindMarqueByNom(String databaseFile, string N)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
-            String query = String.Format("SELECT RefMarque, Nom FROM Marques WHERE Nom = '{0}'", N);
+            String query = String.Format("SELECT * FROM {0} WHERE Nom = '{1}'", Configuration.MARQUE_TABLE_NAME, N);
             DataTable marquesTable = helper.GetDataTable(query);
             if (marquesTable.Rows.Count == 0)
             {
@@ -82,13 +78,13 @@ namespace Mercure
         public static void RemoveMarque(String databaseFile, int Ref)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
-            helper.Delete("Marques", String.Format("RefMarque = {0}", Ref));
+            helper.Delete(Configuration.MARQUE_TABLE_NAME, String.Format("RefMarque = {0}", Ref));
         }
 
         public static List<Marque> GetAll(String databaseFile)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
-            DataTable marquesTable = helper.GetDataTable("SELECT * FROM Marques");
+            DataTable marquesTable = helper.GetDataTable(String.Format("SELECT * FROM {0}", Configuration.MARQUE_TABLE_NAME));
             List<Marque> marques = new List<Marque>();
             foreach (DataRow r in marquesTable.Rows)
             {
@@ -101,13 +97,13 @@ namespace Mercure
         public static bool ClearMarqueTable(String databaseFile)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
-            return helper.ClearTable("Marques");
+            return helper.ClearTable(Configuration.MARQUE_TABLE_NAME);
         }
 
         public static int GetSize(String databaseFile)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
-            String query = String.Format("SELECT * FROM Marques");
+            String query = String.Format("SELECT * FROM {0}", Configuration.MARQUE_TABLE_NAME);
             DataTable marquesTable = helper.GetDataTable(query);
             return marquesTable.Rows.Count;
         }

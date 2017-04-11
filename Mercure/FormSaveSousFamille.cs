@@ -12,24 +12,66 @@ using System.Xml;
 
 namespace Mercure
 {
-    
- 
-        public partial class FormSaveSousFamille : Form
-      {
-          private GroupBox groupBox1;
-          private Button sauvegarderButton;
-        private ComboBox familleList;
+    public partial class FormSaveSousFamille : Form
+    {
+        private GroupBox groupBox1;
+        private Button sauvegarderButton;
+        private ComboBox familleComboBox;
         private TextBox nomSousTextBox;
         private Label label3;
         private Label label2;
         private Label label1;
         private TextBox referenceSousTextBox;
 
+        /**
+        * modifier sous-famille ou non
+        */
+        private bool toUpdate = false;
 
-            private void InitializeComponent()
-            {
+        /**
+        * nom de la base de données
+        */
+        private String databaseFileName = Configuration.DEFAULT_DATABASE;
+
+        /**
+        * Liste des familles
+        */
+        private List<Famille> familleList = null;
+
+        public FormSaveSousFamille()
+        {
+            InitializeComponent();
+            InitializeLists();
+        }
+
+        public FormSaveSousFamille(String databaseFileName)
+        {
+            this.databaseFileName = databaseFileName;
+            InitializeComponent();
+            InitializeLists();
+        }
+
+        public FormSaveSousFamille(SousFamille sousFamille)
+        {
+            this.toUpdate = true;
+            InitializeComponent();
+            InitializeLists();
+            InitializeTextBoxes(sousFamille);
+        }
+
+        public FormSaveSousFamille(String databaseFileName, SousFamille sousFamille)
+        {
+            this.databaseFileName = databaseFileName;
+            this.toUpdate = true;
+            InitializeComponent();
+            InitializeLists();
+            InitializeTextBoxes(sousFamille);
+        }
+
+        private void InitializeComponent()
+        {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.familleList = new System.Windows.Forms.ComboBox();
+            this.familleComboBox = new System.Windows.Forms.ComboBox();
             this.nomSousTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -41,7 +83,7 @@ namespace Mercure
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.familleList);
+            this.groupBox1.Controls.Add(this.familleComboBox);
             this.groupBox1.Controls.Add(this.nomSousTextBox);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
@@ -55,13 +97,13 @@ namespace Mercure
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Remplir";
             // 
-            // familleList
+            // familleComboBox
             // 
-            this.familleList.FormattingEnabled = true;
-            this.familleList.Location = new System.Drawing.Point(137, 129);
-            this.familleList.Name = "familleList";
-            this.familleList.Size = new System.Drawing.Size(289, 21);
-            this.familleList.TabIndex = 6;
+            this.familleComboBox.FormattingEnabled = true;
+            this.familleComboBox.Location = new System.Drawing.Point(137, 129);
+            this.familleComboBox.Name = "familleComboBox";
+            this.familleComboBox.Size = new System.Drawing.Size(289, 21);
+            this.familleComboBox.TabIndex = 6;
             // 
             // nomSousTextBox
             // 
@@ -106,6 +148,7 @@ namespace Mercure
             this.sauvegarderButton.TabIndex = 1;
             this.sauvegarderButton.Text = "Sauvegarder";
             this.sauvegarderButton.UseVisualStyleBackColor = false;
+            this.sauvegarderButton.Click += new System.EventHandler(this.sauvegarderButton_Click);
             // 
             // referenceSousTextBox
             // 
@@ -123,6 +166,79 @@ namespace Mercure
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
+        }
+
+        /**
+       * Fonction privée pour initialiser les champs d'article à modifier
+       */
+        private void InitializeTextBoxes(SousFamille sousFamille)
+        {
+            referenceSousTextBox.Text = Convert.ToString(sousFamille.RefSousFamille);
+            nomSousTextBox.Text = sousFamille.Nom;
+
+            int i = 0;
+            foreach (Famille famille in familleList)
+            {
+                if(famille.RefFamille == sousFamille.RefFamille)
+                {
+                    familleComboBox.SelectedIndex = i;
+                }
+                i++;
             }
         }
+
+        /**
+        * Fonction privée pour initialiser les listes de sous-familles et marques
+        */
+        private void InitializeLists()
+        {
+            //Chargement la liste des familles dans le combo-box
+            familleList = Famille.GetAll(databaseFileName);
+            foreach (Famille f in familleList)
+            {
+                familleComboBox.Items.Add(f.Nom);
+                familleComboBox.SelectedIndex = 0; // Selection de la premiere famille par défaut
+            }
+        }
+
+        private void sauvegarderButton_Click(object sender, EventArgs e)
+        {
+            SaveSousFamille();
+        }
+
+        private void SaveSousFamille()
+        {
+            String RefSF = referenceSousTextBox.Text;
+            String Nom = nomSousTextBox.Text;
+            int fIndex = familleComboBox.SelectedIndex;
+            if(fIndex > -1 && !RefSF.Equals("") && !Nom.Equals(""))
+            {
+                try
+                {
+                    int RefSousFamille = int.Parse(RefSF); //converte string à int
+                    int RefFamille = familleList[fIndex].RefFamille;
+                    SousFamille sousFamille = new SousFamille(RefSousFamille, RefFamille, Nom);
+                    if(toUpdate)
+                    {
+                        SousFamille.UpdateSousFamille(databaseFileName, sousFamille);
+                        MessageBox.Show("The sous-famille was updated.", "Sous-Famille info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        SousFamille.InsertSousFamille(databaseFileName, sousFamille);
+                        MessageBox.Show("The sous-famille was added.", "Sous-Famille info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    Dispose();
+                }
+                catch(FormatException e)
+                {
+                    MessageBox.Show(e.Message, "Sous-Famille error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please fill all the required fields...", "Sous-Famille error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+    }
 }

@@ -43,12 +43,14 @@ namespace Mercure
 
         public FormSaveMarque(Marque marque)
         {
+            this.toUpdate = true;
             InitializeComponent();
             InitializeTextBoxes(marque);
         }
 
         public FormSaveMarque(String databaseFileName, Marque marque)
         {
+            this.toUpdate = true;
             this.databaseFileName = databaseFileName;
             InitializeComponent();
             InitializeTextBoxes(marque);
