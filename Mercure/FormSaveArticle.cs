@@ -304,16 +304,19 @@ namespace Mercure
             String RefArticle = referenceArticleTextBox.Text;
             //description de l'article dans le champ de texte
             String Description = descriptionTextBox.Text;
+            String Prix = prixTextBox.Text;
+            String Quantite = quantiteTextBox.Text;
             //l'indice de sous-famille selectionné
             int sfIndex = sousFamilleComboBox.SelectedIndex;
             //l'indice de la marque selectionnée
             int mIndex = marqueComboBox.SelectedIndex;
-            try
+            if (sfIndex > -1 && mIndex > -1 && !RefArticle.Equals("") && !Description.Equals("") && !Prix.Equals("") && !Quantite.Equals(""))
             {
-                float prix = float.Parse(prixTextBox.Text, CultureInfo.InvariantCulture); // conversion de string à float
-                int quantite = int.Parse(quantiteTextBox.Text, CultureInfo.InvariantCulture); // conversion de string à int
-                if (sfIndex > -1 && mIndex > -1 && !RefArticle.Equals(""))
+                try
                 {
+                    float prix = float.Parse(Prix, CultureInfo.InvariantCulture); // conversion de string à float
+                    int quantite = int.Parse(Quantite, CultureInfo.InvariantCulture); // conversion de string à int
+                
                     //Prendre sous-famille choisi
                     SousFamille sousFamille = sousFamilleList[sfIndex];
                     //Prendre la marque choisie
@@ -335,19 +338,18 @@ namespace Mercure
                     //Fermer la fenetre
                     Dispose();
                 }
-                else
+                catch (FormatException e)
                 {
-                    //Message de remplir pour l'utilisateur
-                    MessageBox.Show("Please fill all the required fields...", "Article error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //Message de l'exception pour notifier l'utilisateur
+                    MessageBox.Show(e.Message, "Article error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
             }
-            catch (FormatException e)
+            else
             {
-                //Message de l'exception pour notifier l'utilisateur
-                MessageBox.Show(e.Message, "Article error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                //Message de remplir pour l'utilisateur
+                MessageBox.Show("Please fill all the required fields...", "Article error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
     }
 }

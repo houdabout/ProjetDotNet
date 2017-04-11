@@ -71,7 +71,14 @@ namespace Mercure
             foreach (KeyValuePair<String, Object> val in data)
             {
                 columns += String.Format(" {0},", val.Key.ToString());
-                values += String.Format(" '{0}',", val.Value);
+                if(val.Value is String)
+                {
+                    values += String.Format(" '{0}',", val.Value);
+                }
+                else
+                {
+                    values += String.Format(" {0},", val.Value);
+                }
             }
             columns = columns.Substring(0, columns.Length - 1);
             values = values.Substring(0, values.Length - 1);
@@ -93,7 +100,14 @@ namespace Mercure
             Boolean returnCode = true;
             foreach (KeyValuePair<String, Object> val in data)
             {
-                set += String.Format(" {0}={1},", val.Key.ToString(), val.Value);
+                if(val.Value is String)
+                {
+                    set += String.Format(" {0}='{1}',", val.Key.ToString(), val.Value);
+                }
+                else
+                {
+                    set += String.Format(" {0}={1},", val.Key.ToString(), val.Value);
+                }
             }
             set = set.Substring(0, set.Length - 1);
             try
