@@ -26,6 +26,40 @@ namespace Mercure
         private TextBox referenceFamilleTextBox;
         private GroupBox groupBox1;
 
+        /**
+        * modifier une article ou non
+        */
+        private bool toUpdate = false;
+
+        /**
+        * nom de la base de données
+        */
+        private String databaseFileName = Configuration.DEFAULT_DATABASE;
+
+        public FormSaveFamille()
+        {
+            InitializeComponent();
+        }
+
+        public FormSaveFamille(String databaseFileName)
+        {
+            this.databaseFileName = databaseFileName;
+            InitializeComponent();
+        }
+
+        public FormSaveFamille(Famille famille)
+        {
+            InitializeComponent();
+            InitializeTextBoxes(famille);
+        }
+
+        public FormSaveFamille(String databaseFileName, Famille famille)
+        {
+            this.databaseFileName = databaseFileName;
+            InitializeComponent();
+            InitializeTextBoxes(famille);
+        }
+
         private void InitializeComponent()
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -105,9 +139,50 @@ namespace Mercure
 
         }
 
+        private void InitializeTextBoxes(Famille famille)
+        {
+            referenceFamilleTextBox.Text = Convert.ToString(famille.RefFamille);
+            nomFamilleTextBox.Text = famille.Nom;
+        }
+
         private void sauvegarderButton_Click(object sender, EventArgs e)
         {
-            //TODO save a famille object
+            SaveFamille();
+        }
+
+        private void SaveFamille()
+        {
+            String RefText = referenceFamilleTextBox.Text;
+            String Nom = nomFamilleTextBox.Text;
+            if(!RefText.Equals("") && !Nom.Equals(""))
+            {
+                try
+                {
+                    int RefFamille = int.Parse(RefText);
+                    Famille famille = new Famille(RefFamille, Nom);
+                    if (toUpdate)
+                    {
+                        Famille.UpdateFamille(databaseFileName, famille);
+                        MessageBox.Show("The family was updated.", "Article info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        
+                    }
+                    else
+                    {
+                        Famille.InsertFamille(databaseFileName, famille);
+                        MessageBox.Show("The family was added.", "Article info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    Dispose();
+                }
+                catch (FormatException e)
+                {
+                    MessageBox.Show(e.Message, "Famille error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please fill all the required fields...", "Article error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
     }
 }

@@ -37,13 +37,13 @@ namespace Mercure
             data.Add("RefMarque", article.RefMarque);
             data.Add("PrixHT", article.PrixHT);
             data.Add("Quantite", article.Quantite);
-            helper.Insert("Articles", data);
+            helper.Insert(Configuration.ARTICLE_TABLE_NAME, data);
         }
 
         public static Article FindArticle(String databaseFile, string Ref)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
-            String query = String.Format("SELECT * FROM Articles WHERE RefArticle = '{0}'", Ref);
+            String query = String.Format("SELECT * FROM {0} WHERE RefArticle = '{1}'", Configuration.ARTICLE_TABLE_NAME, Ref);
             try
             {
                 DataTable table = helper.GetDataTable(query);
@@ -70,7 +70,7 @@ namespace Mercure
         public static void RemoveArticle(String databaseFile, string Ref)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
-            helper.Delete("Articles", String.Format("RefArticle = '{0}'", Ref));
+            helper.Delete(Configuration.ARTICLE_TABLE_NAME, String.Format("RefArticle = '{0}'", Ref));
         }
 
         public static void UpdateArticle(String databaseFile, Article article)
@@ -82,7 +82,7 @@ namespace Mercure
             data.Add("RefMarque", article.RefMarque);
             data.Add("PrixHT", article.PrixHT);
             data.Add("Quantite", article.Quantite);
-            helper.Update("Articles", data, String.Format("RefArticle = '{0}'", article.RefArticle));
+            helper.Update(Configuration.ARTICLE_TABLE_NAME, data, String.Format("RefArticle = '{0}'", article.RefArticle));
         }
 
         public static List<Article> GetAll(String databaseFile)
@@ -91,7 +91,7 @@ namespace Mercure
             List<Article> articles = new List<Article>();
             try
             {
-                DataTable table = helper.GetDataTable("SELECT * FROM Articles");
+                DataTable table = helper.GetDataTable(String.Format("SELECT * FROM {0}", Configuration.ARTICLE_TABLE_NAME));
                 foreach (DataRow r in table.Rows)
                 {
                     Article article = new Article(
@@ -114,23 +114,16 @@ namespace Mercure
         public static bool ClearArticleTable(String databaseFile)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
-            return helper.ClearTable("Articles");
+            return helper.ClearTable(Configuration.ARTICLE_TABLE_NAME);
         }
 
         public static int GetSize(String databaseFile)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
-            String query = String.Format("SELECT * FROM Articles");
-            try
-            {
-                DataTable marquesTable = helper.GetDataTable(query);
-                return marquesTable.Rows.Count;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("GetSize error : " + e.Message);
-                return 0;
-            }
+            String query = String.Format("SELECT Count(*) AS count FROM {0}", Configuration.ARTICLE_TABLE_NAME);
+            DataTable table = helper.GetDataTable(query);
+            DataRow r = table.Rows[0];
+            return Int32.Parse(r["count"].ToString());
         }
     }
 }

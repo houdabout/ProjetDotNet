@@ -100,20 +100,20 @@
             // ajouterArticleButton
             // 
             this.ajouterArticleButton.Name = "ajouterArticleButton";
-            this.ajouterArticleButton.Size = new System.Drawing.Size(152, 22);
+            this.ajouterArticleButton.Size = new System.Drawing.Size(129, 22);
             this.ajouterArticleButton.Text = "Ajouter";
             this.ajouterArticleButton.Click += new System.EventHandler(this.ajouterArticleButton_Click);
             // 
             // modifierArticleButton
             // 
             this.modifierArticleButton.Name = "modifierArticleButton";
-            this.modifierArticleButton.Size = new System.Drawing.Size(152, 22);
+            this.modifierArticleButton.Size = new System.Drawing.Size(129, 22);
             this.modifierArticleButton.Text = "Modifier";
             // 
             // supprimerArticleButton
             // 
             this.supprimerArticleButton.Name = "supprimerArticleButton";
-            this.supprimerArticleButton.Size = new System.Drawing.Size(152, 22);
+            this.supprimerArticleButton.Size = new System.Drawing.Size(129, 22);
             this.supprimerArticleButton.Text = "Supprimer";
             // 
             // familleToolStripMenuItem
@@ -129,19 +129,20 @@
             // ajouterFamilleButton
             // 
             this.ajouterFamilleButton.Name = "ajouterFamilleButton";
-            this.ajouterFamilleButton.Size = new System.Drawing.Size(129, 22);
+            this.ajouterFamilleButton.Size = new System.Drawing.Size(152, 22);
             this.ajouterFamilleButton.Text = "Ajouter";
+            this.ajouterFamilleButton.Click += new System.EventHandler(this.ajouterFamilleButton_Click);
             // 
             // modifierFamilleButton
             // 
             this.modifierFamilleButton.Name = "modifierFamilleButton";
-            this.modifierFamilleButton.Size = new System.Drawing.Size(129, 22);
+            this.modifierFamilleButton.Size = new System.Drawing.Size(152, 22);
             this.modifierFamilleButton.Text = "Modifier";
             // 
             // supprimerFamilleButton
             // 
             this.supprimerFamilleButton.Name = "supprimerFamilleButton";
-            this.supprimerFamilleButton.Size = new System.Drawing.Size(129, 22);
+            this.supprimerFamilleButton.Size = new System.Drawing.Size(152, 22);
             this.supprimerFamilleButton.Text = "Supprimer";
             // 
             // sousFamilleToolStripMenuItem

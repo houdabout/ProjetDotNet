@@ -25,14 +25,14 @@ namespace Mercure
             Dictionary<String, Object> data = new Dictionary<String, Object>();
             data.Add("RefFamille", famille.RefFamille);
             data.Add("Nom", famille.Nom);
-            helper.Insert("Familles", data);
+            helper.Insert(Configuration.FAMILLE_TABLE_NAME, data);
         }
 
         public static Famille FindFamille(String databaseFile, int Ref)
         {
 
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
-            String query = String.Format("SELECT * FROM Familles WHERE RefFamille = {0}", Ref);
+            String query = String.Format("SELECT * FROM {0} WHERE RefFamille = {1}", Configuration.FAMILLE_TABLE_NAME, Ref);
             try
             {
                 DataTable table = helper.GetDataTable(query);
@@ -56,7 +56,7 @@ namespace Mercure
         {
 
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
-            String query = String.Format("SELECT * FROM Familles WHERE Nom = '{0}'", NomF);
+            String query = String.Format("SELECT * FROM {0} WHERE Nom = '{1}'", Configuration.FAMILLE_TABLE_NAME, NomF);
             DataTable table = helper.GetDataTable(query);
             if (table.Rows.Count == 0)
             {
@@ -69,16 +69,24 @@ namespace Mercure
 
         }
 
+        public static void UpdateFamille(String databaseFile, Famille famille)
+        {
+            SQLiteHelper helper = new SQLiteHelper(databaseFile);
+            Dictionary<String, Object> data = new Dictionary<String, Object>();
+            data.Add("Nom", famille.Nom);
+            helper.Update(Configuration.FAMILLE_TABLE_NAME, data, String.Format("RefFamille = {0}", famille.RefFamille));
+        }
+
         public static void RemoveFamille(String databaseFile, int Ref)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
-            helper.Delete("Familles", String.Format("RefFamille = {0}", Ref));
+            helper.Delete(Configuration.FAMILLE_TABLE_NAME, String.Format("RefFamille = {0}", Ref));
         }
 
         public static List<Famille> GetAll(String databaseFile)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
-            DataTable marquesTable = helper.GetDataTable("SELECT * FROM Familles");
+            DataTable marquesTable = helper.GetDataTable(String.Format("SELECT * FROM {0}", Configuration.FAMILLE_TABLE_NAME));
             List<Famille> familles = new List<Famille>();
             foreach (DataRow r in marquesTable.Rows)
             {
@@ -92,7 +100,7 @@ namespace Mercure
         public static int GetSize(String databaseFile)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
-            String query = String.Format("SELECT Count(*) AS count FROM Familles");
+            String query = String.Format("SELECT Count(*) AS count FROM {0}", Configuration.FAMILLE_TABLE_NAME);
             DataTable table = helper.GetDataTable(query);
             DataRow r = table.Rows[0];
             return Int32.Parse(r["count"].ToString());

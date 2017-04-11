@@ -31,5 +31,11 @@ namespace Mercure
             FormSaveArticle saveArticle = new FormSaveArticle();
             saveArticle.ShowDialog();
         }
+
+        private void ajouterFamilleButton_Click(object sender, EventArgs e)
+        {
+            FormSaveFamille saveFamille = new FormSaveFamille();
+            saveFamille.ShowDialog();
+        }
     }
 }
