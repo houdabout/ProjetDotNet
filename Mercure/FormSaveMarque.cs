@@ -30,17 +30,30 @@ namespace Mercure
         */
         private String databaseFileName = Configuration.DEFAULT_DATABASE;
 
+        /**
+        * Constructeur par défaut
+        */
         public FormSaveMarque()
         {
             InitializeComponent();
         }
 
+        /**
+        * Constructeur
+        * Param:
+        *   Nom de la base de données
+        */
         public FormSaveMarque(String databaseFileName)
         {
             this.databaseFileName = databaseFileName;
             InitializeComponent();
         }
 
+        /**
+        * Constructeur
+        * Param:
+        *   La marque
+        */
         public FormSaveMarque(Marque marque)
         {
             this.toUpdate = true;
@@ -48,6 +61,12 @@ namespace Mercure
             InitializeTextBoxes(marque);
         }
 
+        /**
+        * Constructeur
+        * Param:
+        *   Nom de la base de données
+        *   La marque
+        */
         public FormSaveMarque(String databaseFileName, Marque marque)
         {
             this.toUpdate = true;
@@ -135,23 +154,34 @@ namespace Mercure
 
         }
 
+        /**
+        * Fonction privée pour initialiser les champs de la marque à modifier
+        */
         private void InitializeTextBoxes(Marque marque)
         {
             referenceMarqueTextBox.Text = Convert.ToString(marque.RefMarque);
             nomMarqueTextBox.Text = marque.Nom;
         }
 
+        /**
+        * Evenement de click sur sauvegarderButton
+        */
         private void sauvegarderButton_Click(object sender, EventArgs e)
         {
             SaveMarque();
         }
 
+        /**
+        * Fonction privée pour sauvegarder la marque
+        */
         private void SaveMarque()
         {
+            //Reference de la marque
             String RefM = referenceMarqueTextBox.Text;
+            //Nom de la marque
             String NomMarque = nomMarqueTextBox.Text;
-
-            if(!RefM.Equals("") && !NomMarque.Equals(""))
+            //L'utilisateur doit fournir le reference et le nom de la marque
+            if (!RefM.Equals("") && !NomMarque.Equals(""))
             {
                 try
                 {
@@ -159,14 +189,17 @@ namespace Mercure
                     Marque marque = new Marque(RefMarque, NomMarque);
                     if(toUpdate)
                     {
+                        //Modification de la marque
                         Marque.UpdateMarque(databaseFileName, marque);
                         MessageBox.Show("The marque was updated.", "Marque info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
+                        //Insertion de la marque
                         Marque.InsertMarque(databaseFileName, marque);
                         MessageBox.Show("The marque was added.", "Marque info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
+                    //Fermer la fenetre
                     Dispose();
                 }
                 catch(FormatException e)
@@ -177,7 +210,7 @@ namespace Mercure
             }
             else
             {
-                //Message de remplission pour l'utilisateur
+                //Message de remplir pour l'utilisateur
                 MessageBox.Show("Please fill all the required fields...", "Marque error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

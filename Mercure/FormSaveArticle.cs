@@ -337,12 +337,13 @@ namespace Mercure
                 }
                 else
                 {
-                    //TODO: translate to french
+                    //Message de remplir pour l'utilisateur
                     MessageBox.Show("Please fill all the required fields...", "Article error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (FormatException e)
             {
+                //Message de l'exception pour notifier l'utilisateur
                 MessageBox.Show(e.Message, "Article error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }

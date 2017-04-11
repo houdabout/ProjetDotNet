@@ -38,12 +38,20 @@ namespace Mercure
         */
         private List<Famille> familleList = null;
 
+        /**
+        * Constructeur par défaut
+        */
         public FormSaveSousFamille()
         {
             InitializeComponent();
             InitializeLists();
         }
 
+        /**
+        * Constructeur
+        * Param:
+        *   Nom de la base de données
+        */
         public FormSaveSousFamille(String databaseFileName)
         {
             this.databaseFileName = databaseFileName;
@@ -51,6 +59,11 @@ namespace Mercure
             InitializeLists();
         }
 
+        /**
+        * Constructeur
+        * Param:
+        *   Sous-Famille à modifier
+        */
         public FormSaveSousFamille(SousFamille sousFamille)
         {
             this.toUpdate = true;
@@ -59,6 +72,12 @@ namespace Mercure
             InitializeTextBoxes(sousFamille);
         }
 
+        /**
+        * Constructeur
+        * Param:
+        *   Nom de la base de données
+        *   Sous-Famille à modifier
+        */
         public FormSaveSousFamille(String databaseFileName, SousFamille sousFamille)
         {
             this.databaseFileName = databaseFileName;
@@ -169,7 +188,7 @@ namespace Mercure
         }
 
         /**
-       * Fonction privée pour initialiser les champs d'article à modifier
+       * Fonction privée pour initialiser les champs de sous-famille à modifier
        */
         private void InitializeTextBoxes(SousFamille sousFamille)
         {
@@ -201,42 +220,58 @@ namespace Mercure
             }
         }
 
+        /**
+        * Evenement de click sur sauvegarderButton
+        */
         private void sauvegarderButton_Click(object sender, EventArgs e)
         {
             SaveSousFamille();
         }
 
+        /**
+        * Fonction privée pour sauvegarder sous-famille à partir les champs de l'interface
+        */
         private void SaveSousFamille()
         {
+            //Reference de sous-famille
             String RefSF = referenceSousTextBox.Text;
+            //Nom de sous-famille
             String Nom = nomSousTextBox.Text;
+            //Indice de la famille selectionnée
             int fIndex = familleComboBox.SelectedIndex;
+            //L'utilisateur doit fournir le reference, nom et la famille
             if(fIndex > -1 && !RefSF.Equals("") && !Nom.Equals(""))
             {
                 try
                 {
                     int RefSousFamille = int.Parse(RefSF); //converte string à int
-                    int RefFamille = familleList[fIndex].RefFamille;
+                    int RefFamille = familleList[fIndex].RefFamille; // reference de la famille selectionnée
+                    //Reconstruction de sous-famille
                     SousFamille sousFamille = new SousFamille(RefSousFamille, RefFamille, Nom);
                     if(toUpdate)
                     {
+                        //Modification de sous-famille
                         SousFamille.UpdateSousFamille(databaseFileName, sousFamille);
                         MessageBox.Show("The sous-famille was updated.", "Sous-Famille info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
+                        //Insertion de sous-famille
                         SousFamille.InsertSousFamille(databaseFileName, sousFamille);
                         MessageBox.Show("The sous-famille was added.", "Sous-Famille info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
+                    //Ferme la fenetre
                     Dispose();
                 }
                 catch(FormatException e)
                 {
+                    //Message de l'exception pour notifier l'utilisateur
                     MessageBox.Show(e.Message, "Sous-Famille error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
+                //Message de remplir pour l'utilisateur
                 MessageBox.Show("Please fill all the required fields...", "Sous-Famille error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

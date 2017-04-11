@@ -217,7 +217,7 @@ namespace Mercure
             }
             else
             {
-                //Message de remplission pour l'utilisateur
+                //Message de remplir pour l'utilisateur
                 MessageBox.Show("Please fill all the required fields...", "Famille error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             
