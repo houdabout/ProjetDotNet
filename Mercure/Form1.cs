@@ -37,5 +37,11 @@ namespace Mercure
             FormSaveFamille saveFamille = new FormSaveFamille();
             saveFamille.ShowDialog();
         }
+
+        private void ajouterMarqueButton_Click(object sender, EventArgs e)
+        {
+            FormSaveMarque saveMarque = new FormSaveMarque();
+            saveMarque.ShowDialog();
+        }
     }
 }

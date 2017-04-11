@@ -129,20 +129,20 @@
             // ajouterFamilleButton
             // 
             this.ajouterFamilleButton.Name = "ajouterFamilleButton";
-            this.ajouterFamilleButton.Size = new System.Drawing.Size(152, 22);
+            this.ajouterFamilleButton.Size = new System.Drawing.Size(129, 22);
             this.ajouterFamilleButton.Text = "Ajouter";
             this.ajouterFamilleButton.Click += new System.EventHandler(this.ajouterFamilleButton_Click);
             // 
             // modifierFamilleButton
             // 
             this.modifierFamilleButton.Name = "modifierFamilleButton";
-            this.modifierFamilleButton.Size = new System.Drawing.Size(152, 22);
+            this.modifierFamilleButton.Size = new System.Drawing.Size(129, 22);
             this.modifierFamilleButton.Text = "Modifier";
             // 
             // supprimerFamilleButton
             // 
             this.supprimerFamilleButton.Name = "supprimerFamilleButton";
-            this.supprimerFamilleButton.Size = new System.Drawing.Size(152, 22);
+            this.supprimerFamilleButton.Size = new System.Drawing.Size(129, 22);
             this.supprimerFamilleButton.Text = "Supprimer";
             // 
             // sousFamilleToolStripMenuItem
@@ -186,19 +186,20 @@
             // ajouterMarqueButton
             // 
             this.ajouterMarqueButton.Name = "ajouterMarqueButton";
-            this.ajouterMarqueButton.Size = new System.Drawing.Size(129, 22);
+            this.ajouterMarqueButton.Size = new System.Drawing.Size(152, 22);
             this.ajouterMarqueButton.Text = "Ajouter";
+            this.ajouterMarqueButton.Click += new System.EventHandler(this.ajouterMarqueButton_Click);
             // 
             // modifierMarqueButton
             // 
             this.modifierMarqueButton.Name = "modifierMarqueButton";
-            this.modifierMarqueButton.Size = new System.Drawing.Size(129, 22);
+            this.modifierMarqueButton.Size = new System.Drawing.Size(152, 22);
             this.modifierMarqueButton.Text = "Modifier";
             // 
             // supprimerMarqueButton
             // 
             this.supprimerMarqueButton.Name = "supprimerMarqueButton";
-            this.supprimerMarqueButton.Size = new System.Drawing.Size(129, 22);
+            this.supprimerMarqueButton.Size = new System.Drawing.Size(152, 22);
             this.supprimerMarqueButton.Text = "Supprimer";
             // 
             // statusStrip2

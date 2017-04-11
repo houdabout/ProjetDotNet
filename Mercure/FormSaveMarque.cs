@@ -13,15 +13,49 @@ namespace Mercure
 {
       public partial class FormSaveMarque : Form
       {
-          private GroupBox groupBox1;
-          private Button sauvegarderButton;
+        private GroupBox groupBox1;
+        private Button sauvegarderButton;
         private TextBox nomMarqueTextBox;
         private Label label2;
         private Label label1;
         private TextBox referenceMarqueTextBox;
 
-          private void InitializeComponent()
-          {
+        /**
+        * modifier une marque ou non
+        */
+        private bool toUpdate = false;
+
+        /**
+        * nom de la base de données
+        */
+        private String databaseFileName = Configuration.DEFAULT_DATABASE;
+
+        public FormSaveMarque()
+        {
+            InitializeComponent();
+        }
+
+        public FormSaveMarque(String databaseFileName)
+        {
+            this.databaseFileName = databaseFileName;
+            InitializeComponent();
+        }
+
+        public FormSaveMarque(Marque marque)
+        {
+            InitializeComponent();
+            InitializeTextBoxes(marque);
+        }
+
+        public FormSaveMarque(String databaseFileName, Marque marque)
+        {
+            this.databaseFileName = databaseFileName;
+            InitializeComponent();
+            InitializeTextBoxes(marque);
+        }
+
+        private void InitializeComponent()
+        {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.nomMarqueTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -79,6 +113,7 @@ namespace Mercure
             this.sauvegarderButton.TabIndex = 1;
             this.sauvegarderButton.Text = "Sauvegarder";
             this.sauvegarderButton.UseVisualStyleBackColor = false;
+            this.sauvegarderButton.Click += new System.EventHandler(this.sauvegarderButton_Click);
             // 
             // referenceMarqueTextBox
             // 
@@ -92,16 +127,57 @@ namespace Mercure
             this.ClientSize = new System.Drawing.Size(446, 221);
             this.Controls.Add(this.groupBox1);
             this.Name = "FormSaveMarque";
-            this.Load += new System.EventHandler(this.FormAjouterMarque_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
-          }
+        }
 
-          private void FormAjouterMarque_Load(object sender, EventArgs e)
-          {
+        private void InitializeTextBoxes(Marque marque)
+        {
+            referenceMarqueTextBox.Text = Convert.ToString(marque.RefMarque);
+            nomMarqueTextBox.Text = marque.Nom;
+        }
 
-          }
-      }
+        private void sauvegarderButton_Click(object sender, EventArgs e)
+        {
+            SaveMarque();
+        }
+
+        private void SaveMarque()
+        {
+            String RefM = referenceMarqueTextBox.Text;
+            String NomMarque = nomMarqueTextBox.Text;
+
+            if(!RefM.Equals("") && !NomMarque.Equals(""))
+            {
+                try
+                {
+                    int RefMarque = int.Parse(RefM);
+                    Marque marque = new Marque(RefMarque, NomMarque);
+                    if(toUpdate)
+                    {
+                        Marque.UpdateMarque(databaseFileName, marque);
+                        MessageBox.Show("The marque was updated.", "Marque info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        Marque.InsertMarque(databaseFileName, marque);
+                        MessageBox.Show("The marque was added.", "Marque info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    Dispose();
+                }
+                catch(FormatException e)
+                {
+                    //Message de l'exception pour notifier l'utilisateur
+                    MessageBox.Show(e.Message, "Marque error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                //Message de remplission pour l'utilisateur
+                MessageBox.Show("Please fill all the required fields...", "Marque error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+    }
 }

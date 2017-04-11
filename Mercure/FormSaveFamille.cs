@@ -27,7 +27,7 @@ namespace Mercure
         private GroupBox groupBox1;
 
         /**
-        * modifier une article ou non
+        * modifier une famille ou non
         */
         private bool toUpdate = false;
 
@@ -195,14 +195,14 @@ namespace Mercure
                     {
                         //Modification de la famille
                         Famille.UpdateFamille(databaseFileName, famille);
-                        MessageBox.Show("The family was updated.", "Article info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("The family was updated.", "Famille info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         
                     }
                     else
                     {
                         //Insertion de la famille
                         Famille.InsertFamille(databaseFileName, famille);
-                        MessageBox.Show("The family was added.", "Article info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("The family was added.", "Famille info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     //Ferme la fenetre
                     Dispose();
@@ -216,7 +216,7 @@ namespace Mercure
             else
             {
                 //Message de remplission pour l'utilisateur
-                MessageBox.Show("Please fill all the required fields...", "Article error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please fill all the required fields...", "Famille error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             
         }

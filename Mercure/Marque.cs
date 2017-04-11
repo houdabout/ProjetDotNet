@@ -51,6 +51,14 @@ namespace Mercure
             }
         }
 
+        public static void UpdateMarque(String databaseFile, Marque marque)
+        {
+            SQLiteHelper helper = new SQLiteHelper(databaseFile);
+            Dictionary<String, Object> data = new Dictionary<String, Object>();
+            data.Add("Nom", marque.Nom);
+            helper.Update(Configuration.MARQUE_TABLE_NAME, data, String.Format("RefMarque = {0}", marque.RefMarque));
+        }
+
         public static Boolean IsMarqueExist(String databaseFile, int Ref)
         {
             return FindMarque(databaseFile, Ref) != null;
