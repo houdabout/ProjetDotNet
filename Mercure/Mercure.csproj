@@ -56,11 +56,11 @@
     <Compile Include="Article.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Famille.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="FormPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="FormPrincipal.Designer.cs">
+      <DependentUpon>FormPrincipal.cs</DependentUpon>
     </Compile>
     <Compile Include="FormSaveArticle.cs">
       <SubType>Form</SubType>
@@ -82,8 +82,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SousFamille.cs" />
     <Compile Include="SQLiteHelper.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="FormPrincipal.resx">
+      <DependentUpon>FormPrincipal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSaveArticle.resx">
       <DependentUpon>FormSaveArticle.cs</DependentUpon>
