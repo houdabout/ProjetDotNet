@@ -27,3 +27,4 @@ C:\Users\simoe\Documents\ProjetDotNet\Mercure\obj\Debug\Mercure.FormSaveMarque.r
 C:\Users\simoe\Documents\ProjetDotNet\Mercure\obj\Debug\Mercure.FormSaveSousFamille.resources
 C:\Users\simoe\Documents\ProjetDotNet\Mercure\obj\Debug\Mercure.FormMarques.resources
 C:\Users\simoe\Documents\ProjetDotNet\Mercure\obj\Debug\Mercure.FormPrincipal.resources
+C:\Users\simoe\Documents\ProjetDotNet\Mercure\obj\Debug\Mercure.FormFamilles.resources

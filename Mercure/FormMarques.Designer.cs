@@ -49,12 +49,11 @@
             this.marqueListView.GridLines = true;
             this.marqueListView.Location = new System.Drawing.Point(11, 13);
             this.marqueListView.Name = "marqueListView";
-            this.marqueListView.Size = new System.Drawing.Size(753, 457);
+            this.marqueListView.Size = new System.Drawing.Size(761, 486);
             this.marqueListView.TabIndex = 0;
             this.marqueListView.UseCompatibleStateImageBehavior = false;
             this.marqueListView.View = System.Windows.Forms.View.Details;
             this.marqueListView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.marqueListView_MouseClick);
-
             // 
             // RefMarqueColumn
             // 
@@ -73,26 +72,26 @@
             this.modifierMarqueButton,
             this.supprimerMarqueButton});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(130, 70);
             // 
             // ajouterMarqueButton
             // 
             this.ajouterMarqueButton.Name = "ajouterMarqueButton";
-            this.ajouterMarqueButton.Size = new System.Drawing.Size(152, 22);
+            this.ajouterMarqueButton.Size = new System.Drawing.Size(129, 22);
             this.ajouterMarqueButton.Text = "Ajouter";
             this.ajouterMarqueButton.Click += new System.EventHandler(this.ajouterMarqueButton_Click);
             // 
             // modifierMarqueButton
             // 
             this.modifierMarqueButton.Name = "modifierMarqueButton";
-            this.modifierMarqueButton.Size = new System.Drawing.Size(152, 22);
+            this.modifierMarqueButton.Size = new System.Drawing.Size(129, 22);
             this.modifierMarqueButton.Text = "Modifier";
             this.modifierMarqueButton.Click += new System.EventHandler(this.modifierMarqueButton_Click);
             // 
             // supprimerMarqueButton
             // 
             this.supprimerMarqueButton.Name = "supprimerMarqueButton";
-            this.supprimerMarqueButton.Size = new System.Drawing.Size(152, 22);
+            this.supprimerMarqueButton.Size = new System.Drawing.Size(129, 22);
             this.supprimerMarqueButton.Text = "Supprimer";
             this.supprimerMarqueButton.Click += new System.EventHandler(this.supprimerMarqueButton_Click);
             // 
@@ -100,7 +99,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(776, 482);
+            this.ClientSize = new System.Drawing.Size(784, 511);
             this.Controls.Add(this.marqueListView);
             this.Name = "FormMarques";
             this.Text = "FormMarques";

@@ -30,14 +30,14 @@ namespace Mercure
         private void ajouteFichierButton_Click(object sender, EventArgs e)
         {
             FormAjouterFichier ajout = new FormAjouterFichier();
-            ajout.ShowDialog();
+            ajout.ShowDialog(this);
             LoadArticles();
         }
 
         private void ajouterArticleButton_Click(object sender, EventArgs e)
         {
             FormSaveArticle saveArticle = new FormSaveArticle();
-            saveArticle.ShowDialog();
+            saveArticle.ShowDialog(this);
             LoadArticles();
         }
 
@@ -54,19 +54,19 @@ namespace Mercure
         private void ajouterFamilleButton_Click(object sender, EventArgs e)
         {
             FormSaveFamille saveFamille = new FormSaveFamille();
-            saveFamille.ShowDialog();
+            saveFamille.ShowDialog(this);
         }
 
         private void ajouterMarqueButton_Click(object sender, EventArgs e)
         {
             FormSaveMarque saveMarque = new FormSaveMarque();
-            saveMarque.ShowDialog();
+            saveMarque.ShowDialog(this);
         }
 
         private void ajouterSousFamilleButton_Click(object sender, EventArgs e)
         {
             FormSaveSousFamille saveSousFamille = new FormSaveSousFamille();
-            saveSousFamille.ShowDialog();
+            saveSousFamille.ShowDialog(this);
         }
         
         private void articleTable_MouseClick(object sender, MouseEventArgs e)
@@ -129,11 +129,11 @@ namespace Mercure
                 item.SubItems.Add(descriptionItem);
 
                 SousFamille sousFamille = SousFamille.FindSousFamille(databaseFileName, article.RefSousFamille);
-                ListViewItem.ListViewSubItem sousFamilleItem = new ListViewItem.ListViewSubItem(item, sousFamille.Nom);
+                ListViewItem.ListViewSubItem sousFamilleItem = new ListViewItem.ListViewSubItem(item, sousFamille != null ? sousFamille.Nom : "");
                 item.SubItems.Add(sousFamilleItem);
 
                 Marque marque = Marque.FindMarque(databaseFileName, article.RefMarque);
-                ListViewItem.ListViewSubItem marqueItem = new ListViewItem.ListViewSubItem(item, marque.Nom);
+                ListViewItem.ListViewSubItem marqueItem = new ListViewItem.ListViewSubItem(item, marque != null ? marque.Nom : "");
                 item.SubItems.Add(marqueItem);
 
                 ListViewItem.ListViewSubItem quantiteItem = new ListViewItem.ListViewSubItem(item, Convert.ToString(article.Quantite));
@@ -175,14 +175,20 @@ namespace Mercure
         private void AjouterArticle()
         {
             FormSaveArticle saveArticle = new FormSaveArticle();
-            saveArticle.ShowDialog();
+            saveArticle.ShowDialog(this);
             LoadArticles();
         }
 
         private void listeMarqueButton_Click(object sender, EventArgs e)
         {
             FormMarques marques = new FormMarques();
-            marques.ShowDialog();
+            marques.ShowDialog(this);
+        }
+
+        private void listeFamilleButton_Click(object sender, EventArgs e)
+        {
+            FormFamilles familles = new FormFamilles();
+            familles.ShowDialog(this);
         }
     }
 }

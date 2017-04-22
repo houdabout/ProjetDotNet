@@ -135,6 +135,7 @@
             this.listeFamilleButton.Name = "listeFamilleButton";
             this.listeFamilleButton.Size = new System.Drawing.Size(152, 22);
             this.listeFamilleButton.Text = "Liste";
+            this.listeFamilleButton.Click += new System.EventHandler(this.listeFamilleButton_Click);
             // 
             // ajouterFamilleButton
             // 
@@ -155,13 +156,13 @@
             // listeSousFamilleButton
             // 
             this.listeSousFamilleButton.Name = "listeSousFamilleButton";
-            this.listeSousFamilleButton.Size = new System.Drawing.Size(152, 22);
+            this.listeSousFamilleButton.Size = new System.Drawing.Size(113, 22);
             this.listeSousFamilleButton.Text = "Liste";
             // 
             // ajouterSousFamilleButton
             // 
             this.ajouterSousFamilleButton.Name = "ajouterSousFamilleButton";
-            this.ajouterSousFamilleButton.Size = new System.Drawing.Size(152, 22);
+            this.ajouterSousFamilleButton.Size = new System.Drawing.Size(113, 22);
             this.ajouterSousFamilleButton.Text = "Ajouter";
             this.ajouterSousFamilleButton.Click += new System.EventHandler(this.ajouterSousFamilleButton_Click);
             // 
@@ -177,14 +178,14 @@
             // listeMarqueButton
             // 
             this.listeMarqueButton.Name = "listeMarqueButton";
-            this.listeMarqueButton.Size = new System.Drawing.Size(152, 22);
+            this.listeMarqueButton.Size = new System.Drawing.Size(113, 22);
             this.listeMarqueButton.Text = "Liste";
             this.listeMarqueButton.Click += new System.EventHandler(this.listeMarqueButton_Click);
             // 
             // ajouterMarqueButton
             // 
             this.ajouterMarqueButton.Name = "ajouterMarqueButton";
-            this.ajouterMarqueButton.Size = new System.Drawing.Size(152, 22);
+            this.ajouterMarqueButton.Size = new System.Drawing.Size(113, 22);
             this.ajouterMarqueButton.Text = "Ajouter";
             this.ajouterMarqueButton.Click += new System.EventHandler(this.ajouterMarqueButton_Click);
             // 
