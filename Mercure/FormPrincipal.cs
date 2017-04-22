@@ -178,5 +178,11 @@ namespace Mercure
             saveArticle.ShowDialog();
             LoadArticles();
         }
+
+        private void listeMarqueButton_Click(object sender, EventArgs e)
+        {
+            FormMarques marques = new FormMarques();
+            marques.ShowDialog();
+        }
     }
 }

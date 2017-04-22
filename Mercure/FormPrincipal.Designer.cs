@@ -37,13 +37,14 @@
             this.modifierArticleButton = new System.Windows.Forms.ToolStripMenuItem();
             this.supprimerArticleButton = new System.Windows.Forms.ToolStripMenuItem();
             this.familleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listeFamilleButton = new System.Windows.Forms.ToolStripMenuItem();
             this.ajouterFamilleButton = new System.Windows.Forms.ToolStripMenuItem();
             this.sousFamilleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listeSousFamilleButton = new System.Windows.Forms.ToolStripMenuItem();
             this.ajouterSousFamilleButton = new System.Windows.Forms.ToolStripMenuItem();
-            this.supprimerSousFamilleButton = new System.Windows.Forms.ToolStripMenuItem();
             this.marqueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listeMarqueButton = new System.Windows.Forms.ToolStripMenuItem();
             this.ajouterMarqueButton = new System.Windows.Forms.ToolStripMenuItem();
-            this.modifierMarqueButton = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.RefArticleColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.DescriptionColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -56,7 +57,6 @@
             this.ajouterUnArticleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modifierArticleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.supprimerArticleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -71,7 +71,7 @@
             this.marqueToolStripMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(690, 24);
+            this.menuStrip2.Size = new System.Drawing.Size(844, 24);
             this.menuStrip2.TabIndex = 0;
             this.menuStrip2.Text = "menuStrip2";
             // 
@@ -103,89 +103,96 @@
             // ajouterArticleButton
             // 
             this.ajouterArticleButton.Name = "ajouterArticleButton";
-            this.ajouterArticleButton.Size = new System.Drawing.Size(152, 22);
+            this.ajouterArticleButton.Size = new System.Drawing.Size(129, 22);
             this.ajouterArticleButton.Text = "Ajouter";
             this.ajouterArticleButton.Click += new System.EventHandler(this.ajouterArticleButton_Click);
             // 
             // modifierArticleButton
             // 
             this.modifierArticleButton.Name = "modifierArticleButton";
-            this.modifierArticleButton.Size = new System.Drawing.Size(152, 22);
+            this.modifierArticleButton.Size = new System.Drawing.Size(129, 22);
             this.modifierArticleButton.Text = "Modifier";
             this.modifierArticleButton.Click += new System.EventHandler(this.modifierArticleButton_Click);
             // 
             // supprimerArticleButton
             // 
             this.supprimerArticleButton.Name = "supprimerArticleButton";
-            this.supprimerArticleButton.Size = new System.Drawing.Size(152, 22);
+            this.supprimerArticleButton.Size = new System.Drawing.Size(129, 22);
             this.supprimerArticleButton.Text = "Supprimer";
             this.supprimerArticleButton.Click += new System.EventHandler(this.supprimerArticleButton_Click);
             // 
             // familleToolStripMenuItem
             // 
             this.familleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.listeToolStripMenuItem,
+            this.listeFamilleButton,
             this.ajouterFamilleButton});
             this.familleToolStripMenuItem.Name = "familleToolStripMenuItem";
             this.familleToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.familleToolStripMenuItem.Text = "Famille";
             // 
+            // listeFamilleButton
+            // 
+            this.listeFamilleButton.Name = "listeFamilleButton";
+            this.listeFamilleButton.Size = new System.Drawing.Size(152, 22);
+            this.listeFamilleButton.Text = "Liste";
+            // 
             // ajouterFamilleButton
             // 
             this.ajouterFamilleButton.Name = "ajouterFamilleButton";
-            this.ajouterFamilleButton.Size = new System.Drawing.Size(129, 22);
+            this.ajouterFamilleButton.Size = new System.Drawing.Size(152, 22);
             this.ajouterFamilleButton.Text = "Ajouter";
             this.ajouterFamilleButton.Click += new System.EventHandler(this.ajouterFamilleButton_Click);
             // 
             // sousFamilleToolStripMenuItem
             // 
             this.sousFamilleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.supprimerSousFamilleButton,
+            this.listeSousFamilleButton,
             this.ajouterSousFamilleButton});
             this.sousFamilleToolStripMenuItem.Name = "sousFamilleToolStripMenuItem";
             this.sousFamilleToolStripMenuItem.Size = new System.Drawing.Size(82, 20);
             this.sousFamilleToolStripMenuItem.Text = "SousFamille";
             // 
+            // listeSousFamilleButton
+            // 
+            this.listeSousFamilleButton.Name = "listeSousFamilleButton";
+            this.listeSousFamilleButton.Size = new System.Drawing.Size(152, 22);
+            this.listeSousFamilleButton.Text = "Liste";
+            // 
             // ajouterSousFamilleButton
             // 
             this.ajouterSousFamilleButton.Name = "ajouterSousFamilleButton";
-            this.ajouterSousFamilleButton.Size = new System.Drawing.Size(129, 22);
+            this.ajouterSousFamilleButton.Size = new System.Drawing.Size(152, 22);
             this.ajouterSousFamilleButton.Text = "Ajouter";
             this.ajouterSousFamilleButton.Click += new System.EventHandler(this.ajouterSousFamilleButton_Click);
-            // 
-            // supprimerSousFamilleButton
-            // 
-            this.supprimerSousFamilleButton.Name = "supprimerSousFamilleButton";
-            this.supprimerSousFamilleButton.Size = new System.Drawing.Size(152, 22);
-            this.supprimerSousFamilleButton.Text = "Liste";
             // 
             // marqueToolStripMenuItem
             // 
             this.marqueToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.modifierMarqueButton,
+            this.listeMarqueButton,
             this.ajouterMarqueButton});
             this.marqueToolStripMenuItem.Name = "marqueToolStripMenuItem";
             this.marqueToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.marqueToolStripMenuItem.Text = "Marque";
             // 
+            // listeMarqueButton
+            // 
+            this.listeMarqueButton.Name = "listeMarqueButton";
+            this.listeMarqueButton.Size = new System.Drawing.Size(152, 22);
+            this.listeMarqueButton.Text = "Liste";
+            this.listeMarqueButton.Click += new System.EventHandler(this.listeMarqueButton_Click);
+            // 
             // ajouterMarqueButton
             // 
             this.ajouterMarqueButton.Name = "ajouterMarqueButton";
-            this.ajouterMarqueButton.Size = new System.Drawing.Size(129, 22);
+            this.ajouterMarqueButton.Size = new System.Drawing.Size(152, 22);
             this.ajouterMarqueButton.Text = "Ajouter";
             this.ajouterMarqueButton.Click += new System.EventHandler(this.ajouterMarqueButton_Click);
             // 
-            // modifierMarqueButton
-            // 
-            this.modifierMarqueButton.Name = "modifierMarqueButton";
-            this.modifierMarqueButton.Size = new System.Drawing.Size(152, 22);
-            this.modifierMarqueButton.Text = "Liste";
-            // 
             // statusStrip2
             // 
-            this.statusStrip2.Location = new System.Drawing.Point(0, 275);
+            this.statusStrip2.Location = new System.Drawing.Point(0, 454);
             this.statusStrip2.Name = "statusStrip2";
-            this.statusStrip2.Size = new System.Drawing.Size(690, 22);
+            this.statusStrip2.Size = new System.Drawing.Size(844, 22);
             this.statusStrip2.TabIndex = 1;
             this.statusStrip2.Text = "statusStrip2";
             // 
@@ -236,7 +243,7 @@
             this.articleListView.Location = new System.Drawing.Point(12, 27);
             this.articleListView.MultiSelect = false;
             this.articleListView.Name = "articleListView";
-            this.articleListView.Size = new System.Drawing.Size(666, 245);
+            this.articleListView.Size = new System.Drawing.Size(820, 415);
             this.articleListView.TabIndex = 3;
             this.articleListView.UseCompatibleStateImageBehavior = false;
             this.articleListView.View = System.Windows.Forms.View.Details;
@@ -274,20 +281,14 @@
             this.supprimerArticleToolStripMenuItem.Text = "Supprimer";
             this.supprimerArticleToolStripMenuItem.Click += new System.EventHandler(this.supprimerArticleToolStripMenuItem_Click);
             // 
-            // listeToolStripMenuItem
+            // FormPrincipal
             // 
-            this.listeToolStripMenuItem.Name = "listeToolStripMenuItem";
-            this.listeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.listeToolStripMenuItem.Text = "Liste";
-            // 
-            // Form1
-            // 
-            this.ClientSize = new System.Drawing.Size(690, 297);
+            this.ClientSize = new System.Drawing.Size(844, 476);
             this.Controls.Add(this.articleListView);
             this.Controls.Add(this.statusStrip2);
             this.Controls.Add(this.menuStrip2);
             this.MainMenuStrip = this.menuStrip2;
-            this.Name = "Form1";
+            this.Name = "FormPrincipal";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip2.ResumeLayout(false);
             this.menuStrip2.PerformLayout();
@@ -315,10 +316,10 @@
         private System.Windows.Forms.ToolStripMenuItem ajouterFamilleButton;
         private System.Windows.Forms.ToolStripMenuItem sousFamilleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ajouterSousFamilleButton;
-        private System.Windows.Forms.ToolStripMenuItem supprimerSousFamilleButton;
+        private System.Windows.Forms.ToolStripMenuItem listeSousFamilleButton;
         private System.Windows.Forms.ToolStripMenuItem marqueToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ajouterMarqueButton;
-        private System.Windows.Forms.ToolStripMenuItem modifierMarqueButton;
+        private System.Windows.Forms.ToolStripMenuItem listeMarqueButton;
         private System.Windows.Forms.ColumnHeader RefArticleColumn;
         private System.Windows.Forms.ColumnHeader DescriptionColumn;
         private System.Windows.Forms.ColumnHeader SousFamilleColumn;
@@ -330,6 +331,6 @@
         private System.Windows.Forms.ToolStripMenuItem ajouterUnArticleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem modifierArticleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem supprimerArticleToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem listeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem listeFamilleButton;
     }
 }
