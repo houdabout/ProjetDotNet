@@ -103,9 +103,10 @@ namespace Mercure
         public static int GetSize(String databaseFile)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
-            String query = String.Format("SELECT * FROM {0}", Configuration.MARQUE_TABLE_NAME);
-            DataTable marquesTable = helper.GetDataTable(query);
-            return marquesTable.Rows.Count;
+            String query = String.Format("SELECT Count(*) AS count FROM {0}", Configuration.MARQUE_TABLE_NAME);
+            DataTable table = helper.GetDataTable(query);
+            DataRow r = table.Rows[0];
+            return Int32.Parse(r["count"].ToString());
         }
     }
 }
