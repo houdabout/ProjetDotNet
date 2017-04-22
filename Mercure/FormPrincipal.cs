@@ -190,5 +190,11 @@ namespace Mercure
             FormFamilles familles = new FormFamilles();
             familles.ShowDialog(this);
         }
+
+        private void listeSousFamilleButton_Click(object sender, EventArgs e)
+        {
+            FormSousFamilles sousFamilles = new FormSousFamilles();
+            sousFamilles.ShowDialog(this);
+        }
     }
 }
