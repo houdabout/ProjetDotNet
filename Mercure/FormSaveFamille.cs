@@ -202,10 +202,16 @@ namespace Mercure
                         //Modification de la famille
                         Famille.UpdateFamille(databaseFileName, famille);
                         MessageBox.Show("The family was updated.", "Famille info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        
                     }
                     else
                     {
+                        Famille f = Famille.FindFamille(databaseFileName, RefFamille);
+                        if(f != null)
+                        {
+                            //Message de l'exception pour notifier l'utilisateur
+                            MessageBox.Show("This reference is already present", "Famille error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
                         //Insertion de la famille
                         Famille.InsertFamille(databaseFileName, famille);
                         MessageBox.Show("The family was added.", "Famille info", MessageBoxButtons.OK, MessageBoxIcon.Information);

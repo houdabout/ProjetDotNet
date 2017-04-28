@@ -21,6 +21,8 @@ namespace Mercure
         private String databaseFileName = Configuration.DEFAULT_DATABASE;
         private List<Article> articles = new List<Article>();
 
+        private int sortColumn = -1;
+
         public FormPrincipal()
         {
             InitializeComponent();
@@ -199,6 +201,32 @@ namespace Mercure
         {
             FormSousFamilles sousFamilles = new FormSousFamilles();
             sousFamilles.ShowDialog(this);
+        }
+
+        private void articleListView_ColumnClick(object sender, System.Windows.Forms.ColumnClickEventArgs e)
+        {
+            // Determine whether the column is the same as the last column clicked.
+            if (e.Column != sortColumn)
+            {
+                // Set the sort column to the new column.
+                sortColumn = e.Column;
+                // Set the sort order to ascending by default.
+                articleListView.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            }
+            else
+            {
+                // Determine what the last sort order was and change it.
+                if (articleListView.Sorting == System.Windows.Forms.SortOrder.Ascending)
+                    articleListView.Sorting = System.Windows.Forms.SortOrder.Descending;
+                else
+                    articleListView.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            }
+
+            // Call the sort method to manually sort.
+            articleListView.Sort();
+            // Set the ListViewItemSorter property to a new ListViewItemComparer
+            // object.
+            this.articleListView.ListViewItemSorter = new ListViewItemComparer(e.Column, articleListView.Sorting);
         }
     }
 }

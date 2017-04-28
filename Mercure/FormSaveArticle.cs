@@ -333,6 +333,13 @@ namespace Mercure
                     }
                     else
                     {
+                        Article Art = Article.FindArticle(databaseFileName, RefArticle);
+                        if (Art != null)
+                        {
+                            //Message de l'exception pour notifier l'utilisateur
+                            MessageBox.Show("This reference is already present", "Famille error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
                         //Insertion de l'article
                         Article.InsertArticle(databaseFileName, article);
                         MessageBox.Show("The article was added.", "Article info", MessageBoxButtons.OK, MessageBoxIcon.Information);

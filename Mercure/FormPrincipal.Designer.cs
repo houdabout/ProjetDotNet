@@ -252,6 +252,7 @@
             this.articleListView.KeyUp += new System.Windows.Forms.KeyEventHandler(this.articleTable_Keys_Click);
             this.articleListView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.articleTable_MouseClick);
             this.articleListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.articleTable_MouseDoubleClick);
+            this.articleListView.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.articleListView_ColumnClick);
             // 
             // contextMenuStrip1
             // 

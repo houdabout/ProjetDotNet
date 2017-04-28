@@ -258,6 +258,13 @@ namespace Mercure
                     }
                     else
                     {
+                        SousFamille Sous_Fam = SousFamille.FindSousFamille(databaseFileName, RefSousFamille);
+                        if (Sous_Fam != null)
+                        {
+                            //Message de l'exception pour notifier l'utilisateur
+                            MessageBox.Show("This reference is already present", "Famille error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
                         //Insertion de sous-famille
                         SousFamille.InsertSousFamille(databaseFileName, sousFamille);
                         MessageBox.Show("The sous-famille was added.", "Sous-Famille info", MessageBoxButtons.OK, MessageBoxIcon.Information);

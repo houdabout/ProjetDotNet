@@ -198,6 +198,13 @@ namespace Mercure
                     }
                     else
                     {
+                        Marque Mar = Marque.FindMarque(databaseFileName, RefMarque);
+                        if (Mar != null)
+                        {
+                            //Message de l'exception pour notifier l'utilisateur
+                            MessageBox.Show("This reference is already present", "Famille error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
                         //Insertion de la marque
                         Marque.InsertMarque(databaseFileName, marque);
                         MessageBox.Show("The marque was added.", "Marque info", MessageBoxButtons.OK, MessageBoxIcon.Information);
