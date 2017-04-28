@@ -1,5 +1,7 @@
 ﻿using System;
-
+/*
+ * @author : HOUDA BOUTBIB et MOHAMMED ELMOUTARAJI
+ * */
 namespace Mercure
 {
     class Configuration

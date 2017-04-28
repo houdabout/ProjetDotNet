@@ -9,6 +9,9 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Xml;
+/*
+ * @author : HOUDA BOUTBIB et MOHAMMED ELMOUTARAJI
+ * */
 namespace Mercure
 {
       public partial class FormSaveMarque : Form
@@ -159,7 +162,7 @@ namespace Mercure
         */
         private void InitializeTextBoxes(Marque marque)
         {
-            referenceMarqueTextBox.Text = Convert.ToString(marque.RefMarque);
+            referenceMarqueTextBox.Text = Convert.ToString(marque.Ref_Marque);
             nomMarqueTextBox.Text = marque.Nom;
         }
 

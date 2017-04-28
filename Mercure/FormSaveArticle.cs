@@ -4,7 +4,9 @@ using System.Globalization;
 using System.Windows.Forms;
 using System.Xml;
 
-
+/*
+ * @author : HOUDA BOUTBIB et MOHAMMED ELMOUTARAJI
+ * */
 namespace Mercure
 {
     public partial class FormSaveArticle : Form
@@ -259,7 +261,7 @@ namespace Mercure
         */
         private void InitializeTextBoxes(Article article)
         {
-            referenceArticleTextBox.Text = article.RefArticle;
+            referenceArticleTextBox.Text = article.Ref_Article;
             descriptionTextBox.Text = article.Description;
             prixTextBox.Text = Convert.ToString(article.PrixHT); // conversion de float à string
             quantiteTextBox.Text = Convert.ToString(article.Quantite); // conversion de int à string
@@ -322,7 +324,7 @@ namespace Mercure
                     //Prendre la marque choisie
                     Marque marque = marqueList[mIndex];
                     //Reconstruction de l'article
-                    Article article = new Article(RefArticle, Description, prix, quantite, sousFamille.RefSousFamille, marque.RefMarque);
+                    Article article = new Article(RefArticle, Description, prix, quantite, sousFamille.Ref_Sous_Famille, marque.Ref_Marque);
                     if(toUpdate)
                     {
                         //Modification de l'article

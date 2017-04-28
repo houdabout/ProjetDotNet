@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+/*
+ * @author : HOUDA BOUTBIB et MOHAMMED ELMOUTARAJI
+ * */
 namespace Mercure
 {
     public partial class FormSousFamilles : Form
@@ -48,7 +51,7 @@ namespace Mercure
                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
                 if (result == DialogResult.Yes)
                 {
-                    SousFamille.RemoveSousFamille(databaseFileName, sousFamilles[aIndex].RefSousFamille);
+                    SousFamille.RemoveSousFamille(databaseFileName, sousFamilles[aIndex].Ref_Sous_Famille);
                     LoadSousFamilles();
                 }
             }
@@ -72,12 +75,12 @@ namespace Mercure
             sousFamilles.AddRange(SousFamille.GetAll(databaseFileName));
             foreach (SousFamille sousFamille in sousFamilles)
             {
-                ListViewItem item = new ListViewItem(Convert.ToString(sousFamille.RefSousFamille));
+                ListViewItem item = new ListViewItem(Convert.ToString(sousFamille.Ref_Sous_Famille));
 
                 ListViewItem.ListViewSubItem nomItem = new ListViewItem.ListViewSubItem(item, sousFamille.Nom);
                 item.SubItems.Add(nomItem);
 
-                Famille famille = Famille.FindFamille(databaseFileName, sousFamille.RefFamille);
+                Famille famille = Famille.FindFamille(databaseFileName, sousFamille.Ref_Famille);
                 ListViewItem.ListViewSubItem familleItem = new ListViewItem.ListViewSubItem(item, famille != null ? famille.Nom : "");
                 item.SubItems.Add(familleItem);
 

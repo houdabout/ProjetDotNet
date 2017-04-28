@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+/*
+ * @author : HOUDA BOUTBIB et MOHAMMED ELMOUTARAJI
+ * */
 namespace Mercure
 {
     public partial class FormMarques : Form
@@ -32,7 +35,7 @@ namespace Mercure
             marques.AddRange(Marque.GetAll(databaseFileName));
             foreach(Marque marque in marques)
             {
-                ListViewItem item = new ListViewItem(Convert.ToString(marque.RefMarque));
+                ListViewItem item = new ListViewItem(Convert.ToString(marque.Ref_Marque));
 
                 ListViewItem.ListViewSubItem nomItem = new ListViewItem.ListViewSubItem(item, marque.Nom);
                 item.SubItems.Add(nomItem);
@@ -68,7 +71,7 @@ namespace Mercure
                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
                 if (result == DialogResult.Yes)
                 {
-                    Marque.RemoveMarque(databaseFileName, marques[aIndex].RefMarque);
+                    Marque.RemoveMarque(databaseFileName, marques[aIndex].Ref_Marque);
                     LoadMarques();
                 }
             }

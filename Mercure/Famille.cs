@@ -6,28 +6,46 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SQLite;
 
+/*
+ * @author : HOUDA BOUTBIB et MOHAMMED ELMOUTARAJI
+ * */
+
 namespace Mercure
 {
     public class Famille
     {
-        public int RefFamille { get; set; }
+        public int Ref_Famille { get; set; }
         public string Nom { get; set; }
+
+        /*
+         * @param reffamille nom
+         * constructeur
+        * */
 
         public Famille(int refF, String Nom)
         {
-            this.RefFamille = refF;
+            this.Ref_Famille = refF;
             this.Nom = Nom;
         }
 
+        /*
+        * @param databasefile famille
+        * inserer une famille dans la base
+       * */
         public static void InsertFamille(String databaseFile, Famille famille)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
             Dictionary<String, Object> data = new Dictionary<String, Object>();
-            data.Add("RefFamille", famille.RefFamille);
+            data.Add("RefFamille", famille.Ref_Famille);
             data.Add("Nom", famille.Nom);
             helper.Insert(Configuration.FAMILLE_TABLE_NAME, data);
         }
 
+        /*
+        * @param databasefile ref
+        * chercher une famille dans la base
+         * @return famille
+       * */
         public static Famille FindFamille(String databaseFile, int Ref)
         {
 
@@ -52,6 +70,11 @@ namespace Mercure
             }
         }
 
+        /*
+        * @param databasefile nom_famille
+        * trouver une famille par nom
+         * @return famille
+       * */
         public static Famille FindFamilleByNom(String databaseFile, string NomF)
         {
 
@@ -69,20 +92,33 @@ namespace Mercure
 
         }
 
+        /*
+        * @param databasefile famille
+        * mettre a jours une famille
+       * */
         public static void UpdateFamille(String databaseFile, Famille famille)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
             Dictionary<String, Object> data = new Dictionary<String, Object>();
             data.Add("Nom", famille.Nom);
-            helper.Update(Configuration.FAMILLE_TABLE_NAME, data, String.Format("RefFamille = {0}", famille.RefFamille));
+            helper.Update(Configuration.FAMILLE_TABLE_NAME, data, String.Format("RefFamille = {0}", famille.Ref_Famille));
         }
 
+        /*
+        * @param databasefile ref
+        * supprimer une famille dans la base
+       * */
         public static void RemoveFamille(String databaseFile, int Ref)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
             helper.Delete(Configuration.FAMILLE_TABLE_NAME, String.Format("RefFamille = {0}", Ref));
         }
 
+        /*
+        * @param databasefile 
+        * recuperer tous les informations sur une famille
+         * @return list de famille
+       * */
         public static List<Famille> GetAll(String databaseFile)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
@@ -97,6 +133,11 @@ namespace Mercure
 
         }
 
+        /*
+        * @param databasefile 
+        * recuperer la taille
+         * @retun size
+       * */
         public static int GetSize(String databaseFile)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);

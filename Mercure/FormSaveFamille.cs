@@ -10,6 +10,10 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Xml;
 
+/*
+ * @author : HOUDA BOUTBIB et MOHAMMED ELMOUTARAJI
+ * */
+
 namespace Mercure
 {
 
@@ -165,7 +169,7 @@ namespace Mercure
         */
         private void InitializeTextBoxes(Famille famille)
         {
-            referenceFamilleTextBox.Text = Convert.ToString(famille.RefFamille); //converte int à string
+            referenceFamilleTextBox.Text = Convert.ToString(famille.Ref_Famille); //converte int à string
             nomFamilleTextBox.Text = famille.Nom;
         }
 

@@ -6,40 +6,56 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SQLite;
 
+/*
+ * @author : HOUDA BOUTBIB et MOHAMMED ELMOUTARAJI
+ * */
+
 namespace Mercure
 {
     public class Article
     {
-        public string RefArticle { get; set; }
+        public string Ref_Article { get; set; }
         public string Description { get; set; }
         public float PrixHT { get; set; }
         public int Quantite { get; set; }
-        public int RefSousFamille { get; set; }
-        public int RefMarque { get; set; }
-
+        public int Ref_Sous_Famille { get; set; }
+        public int Ref_Marque { get; set; }
+        /*
+         * @param refARTICLE  description prix quantite refsousfamille refmarque
+         * constructeur
+         */
         public Article(string RefA, string Desc, float Prix, int Quantite, int RefSF, int RefM)
         {
-            this.RefArticle = RefA;
+            this.Ref_Article = RefA;
             this.Description = Desc;
             this.PrixHT = Prix;
             this.Quantite = Quantite;
-            this.RefSousFamille = RefSF;
-            this.RefMarque = RefM;
+            this.Ref_Sous_Famille = RefSF;
+            this.Ref_Marque = RefM;
         }
 
+        /*
+        * @param databasefile articl
+        * inserer un article dans la base
+        */
         public static void InsertArticle(String databaseFile, Article article)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
             Dictionary<String, Object> data = new Dictionary<String, Object>();
-            data.Add("RefArticle", article.RefArticle);
+            data.Add("RefArticle", article.Ref_Article);
             data.Add("Description", article.Description);
-            data.Add("RefSousFamille", article.RefSousFamille);
-            data.Add("RefMarque", article.RefMarque);
+            data.Add("RefSousFamille", article.Ref_Sous_Famille);
+            data.Add("RefMarque", article.Ref_Marque);
             data.Add("PrixHT", article.PrixHT);
             data.Add("Quantite", article.Quantite);
             helper.Insert(Configuration.ARTICLE_TABLE_NAME, data);
         }
 
+        /*
+        * @param databasefile ref
+        * chercher un article dans la base
+         * @return article
+        */
         public static Article FindArticle(String databaseFile, string Ref)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
@@ -67,6 +83,10 @@ namespace Mercure
             }
         }
 
+        /*
+       * @param databasefile ref
+       * supprimer un article de la base
+       */
         public static void RemoveArticle(String databaseFile, string Ref)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
@@ -78,13 +98,18 @@ namespace Mercure
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
             Dictionary<String, Object> data = new Dictionary<String, Object>();
             data.Add("Description", article.Description);
-            data.Add("RefSousFamille", article.RefSousFamille);
-            data.Add("RefMarque", article.RefMarque);
+            data.Add("RefSousFamille", article.Ref_Sous_Famille);
+            data.Add("RefMarque", article.Ref_Marque);
             data.Add("PrixHT", article.PrixHT);
             data.Add("Quantite", article.Quantite);
-            helper.Update(Configuration.ARTICLE_TABLE_NAME, data, String.Format("RefArticle = '{0}'", article.RefArticle));
+            helper.Update(Configuration.ARTICLE_TABLE_NAME, data, String.Format("RefArticle = '{0}'", article.Ref_Article));
         }
 
+        /*
+         * @param databasefile 
+         * recuperer tous les informations sur l'article
+         * @return list d'article
+        */
         public static List<Article> GetAll(String databaseFile)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
@@ -111,12 +136,22 @@ namespace Mercure
             return articles;
         }
 
+        /*
+         * @param databasefile 
+        * supprimer un article de la table
+         * @return bool
+         */
         public static bool ClearArticleTable(String databaseFile)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
             return helper.ClearTable(Configuration.ARTICLE_TABLE_NAME);
         }
 
+        /*
+       * @param databasefile ref
+       * récuperer la taille de table
+        * @return size
+       */
         public static int GetSize(String databaseFile)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);

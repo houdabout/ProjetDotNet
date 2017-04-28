@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SQLite;
 
+
+/*
+ * @author : HOUDA BOUTBIB et MOHAMMED ELMOUTARAJI
+ * */
+
 namespace Mercure
 {
     public class SQLiteHelper

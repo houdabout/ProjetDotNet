@@ -11,6 +11,9 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Threading;
 
+/*
+ * @author : HOUDA BOUTBIB et MOHAMMED ELMOUTARAJI
+ * */
 namespace Mercure
 {
     public partial class FormAjouterFichier : Form
@@ -348,7 +351,7 @@ namespace Mercure
             {
                 //Insertion de sous-famille
                 int Count = SousFamille.GetSize(databaseFileName);
-                sousFamille = new SousFamille(Count, famille.RefFamille, sousFamilleNom);
+                sousFamille = new SousFamille(Count, famille.Ref_Famille, sousFamilleNom);
                 SousFamille.InsertSousFamille(databaseFileName, sousFamille);
 
                 //Affiche d'un message de notification
@@ -398,7 +401,7 @@ namespace Mercure
             if (article == null)
             {
                 //Insertion de l'article
-                article = new Article(refArticle, description, prixHT, 0, sousFamille.RefSousFamille, marque.RefMarque);
+                article = new Article(refArticle, description, prixHT, 0, sousFamille.Ref_Sous_Famille, marque.Ref_Marque);
                 Article.InsertArticle(databaseFileName, article);
 
                 //Affiche d'un message de notification

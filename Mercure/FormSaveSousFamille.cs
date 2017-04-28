@@ -9,7 +9,9 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Xml;
-
+/*
+ * @author : HOUDA BOUTBIB et MOHAMMED ELMOUTARAJI
+ * */
 namespace Mercure
 {
     public partial class FormSaveSousFamille : Form
@@ -192,13 +194,13 @@ namespace Mercure
        */
         private void InitializeTextBoxes(SousFamille sousFamille)
         {
-            referenceSousTextBox.Text = Convert.ToString(sousFamille.RefSousFamille);
+            referenceSousTextBox.Text = Convert.ToString(sousFamille.Ref_Sous_Famille);
             nomSousTextBox.Text = sousFamille.Nom;
 
             int i = 0;
             foreach (Famille famille in familleList)
             {
-                if(famille.RefFamille == sousFamille.RefFamille)
+                if(famille.Ref_Famille == sousFamille.Ref_Famille)
                 {
                     familleComboBox.SelectedIndex = i;
                 }
@@ -245,7 +247,7 @@ namespace Mercure
                 try
                 {
                     int RefSousFamille = int.Parse(RefSF); //converte string à int
-                    int RefFamille = familleList[fIndex].RefFamille; // reference de la famille selectionnée
+                    int RefFamille = familleList[fIndex].Ref_Famille; // reference de la famille selectionnée
                     //Reconstruction de sous-famille
                     SousFamille sousFamille = new SousFamille(RefSousFamille, RefFamille, Nom);
                     if(toUpdate)

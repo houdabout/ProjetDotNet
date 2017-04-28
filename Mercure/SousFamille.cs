@@ -5,31 +5,49 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 
+/*
+ * @author : HOUDA BOUTBIB et MOHAMMED ELMOUTARAJI
+ * */
+
 namespace Mercure
 {
     public class SousFamille
     {
-        public int RefSousFamille { get; set; }
-        public int RefFamille { get; set; }
+        public int Ref_Sous_Famille { get; set; }
+        public int Ref_Famille { get; set; }
         public string Nom { get; set; }
 
+        /*
+       * @param refsousfamille reffamille nom
+       * constructeur
+       */
         public SousFamille(int refSF, int refF, String n)
         {
-            RefSousFamille = refSF;
-            RefFamille = refF;
+            Ref_Sous_Famille = refSF;
+            Ref_Famille = refF;
             Nom = n;
         }
 
+
+        /*
+       * @param databasefile sousfamille
+       * inserer une sous famille dans la table
+       */
         public static void InsertSousFamille(String databaseFile, SousFamille sousF)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
             Dictionary<String, Object> data = new Dictionary<String, Object>();
-            data.Add("RefSousFamille", sousF.RefSousFamille);
-            data.Add("RefFamille", sousF.RefFamille);
+            data.Add("RefSousFamille", sousF.Ref_Sous_Famille);
+            data.Add("RefFamille", sousF.Ref_Famille);
             data.Add("Nom", sousF.Nom);
             helper.Insert(Configuration.SOUS_FAMILLE_TABLE_NAME, data);
         }
 
+        /*
+       * @param databasefile ref
+       * chercher une sous famille
+       * @return sousfamille
+       */
         public static SousFamille FindSousFamille(String databaseFile, int Ref)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
@@ -54,6 +72,11 @@ namespace Mercure
             }
         }
 
+        /*
+       * @param databasefile nom
+       * chercher par nom une sous famille
+       * @return sousfamille
+       */
         public static SousFamille FindSousFamilleByNom(String databaseFile, string N)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
@@ -70,21 +93,33 @@ namespace Mercure
             return new SousFamille(RefSousF, RefF, Nom);
         }
 
+        /*
+       * @param databasefile sousfamille
+       * mettre a jours une sous famille
+       */
         public static void UpdateSousFamille(String databaseFile, SousFamille sousFamille)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
             Dictionary<String, Object> data = new Dictionary<String, Object>();
             data.Add("Nom", sousFamille.Nom);
-            data.Add("RefFamille", sousFamille.RefFamille);
-            helper.Update(Configuration.SOUS_FAMILLE_TABLE_NAME, data, String.Format("RefSousFamille = {0}", sousFamille.RefSousFamille));
+            data.Add("RefFamille", sousFamille.Ref_Famille);
+            helper.Update(Configuration.SOUS_FAMILLE_TABLE_NAME, data, String.Format("RefSousFamille = {0}", sousFamille.Ref_Sous_Famille));
         }
-
+        /*
+       * @param databasefile ref
+       * supprimer une sous famille de la table
+       */
         public static void RemoveSousFamille(String databaseFile, int Ref)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
             helper.Delete(Configuration.SOUS_FAMILLE_TABLE_NAME, String.Format("RefSousFamille = {0}", Ref));
         }
 
+        /*
+       * @param databasefile 
+       * recuperer les informations d'une sous famille
+       * @return listde sous famille
+       */
         public static List<SousFamille> GetAll(String databaseFile)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);
@@ -101,6 +136,11 @@ namespace Mercure
             return sousFamilles;
         }
 
+        /*
+       * @param databasefile 
+       * @return size
+       * recuperer la taille 
+       */
         public static int GetSize(String databaseFile)
         {
             SQLiteHelper helper = new SQLiteHelper(databaseFile);

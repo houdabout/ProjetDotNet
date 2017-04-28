@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
+/*
+ * @author : HOUDA BOUTBIB et MOHAMMED ELMOUTARAJI
+ * */
+
 namespace Mercure
 {
     public partial class FormPrincipal : Form
@@ -123,16 +127,16 @@ namespace Mercure
             articles.AddRange(Article.GetAll(databaseFileName));
             foreach (Article article in articles)
             {
-                ListViewItem item = new ListViewItem(article.RefArticle);
+                ListViewItem item = new ListViewItem(article.Ref_Article);
 
                 ListViewItem.ListViewSubItem descriptionItem = new ListViewItem.ListViewSubItem(item, article.Description);
                 item.SubItems.Add(descriptionItem);
 
-                SousFamille sousFamille = SousFamille.FindSousFamille(databaseFileName, article.RefSousFamille);
+                SousFamille sousFamille = SousFamille.FindSousFamille(databaseFileName, article.Ref_Sous_Famille);
                 ListViewItem.ListViewSubItem sousFamilleItem = new ListViewItem.ListViewSubItem(item, sousFamille != null ? sousFamille.Nom : "");
                 item.SubItems.Add(sousFamilleItem);
 
-                Marque marque = Marque.FindMarque(databaseFileName, article.RefMarque);
+                Marque marque = Marque.FindMarque(databaseFileName, article.Ref_Marque);
                 ListViewItem.ListViewSubItem marqueItem = new ListViewItem.ListViewSubItem(item, marque != null ? marque.Nom : "");
                 item.SubItems.Add(marqueItem);
 
@@ -162,11 +166,11 @@ namespace Mercure
             if (articleListView.SelectedIndices.Count > 0)
             {
                 int aIndex = articleListView.SelectedIndices[0];
-                DialogResult result = MessageBox.Show("Are you sure you want to delete : " + articles[aIndex].RefArticle, "Delete article",
+                DialogResult result = MessageBox.Show("Are you sure you want to delete : " + articles[aIndex].Ref_Article, "Delete article",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
                 if (result == DialogResult.Yes)
                 {
-                    Article.RemoveArticle(databaseFileName, articles[aIndex].RefArticle);
+                    Article.RemoveArticle(databaseFileName, articles[aIndex].Ref_Article);
                     LoadArticles();
                 }
             }
